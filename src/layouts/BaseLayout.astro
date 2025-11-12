@@ -1,5 +1,7 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
+import TrustedTypesInit from '../components/TrustedTypesInit.astro';
 
 interface Props {
   title: string;
@@ -30,14 +32,18 @@ const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Trusted Types Policy - MUST load first for CSP enforcement -->
+  <TrustedTypesInit />
+
   <!-- Critical Performance Hints -->
   <link rel="preconnect" href={siteUrl} crossorigin>
   <link rel="dns-prefetch" href={siteUrl}>
 
-  <!-- Preload Critical Assets (LCP Optimization) -->
-  <!-- TODO: Add actual font files once hosted -->
-  <!-- <link rel="preload" as="font" type="font/woff2" href="/assets/font/inter-var.woff2" crossorigin> -->
-  <!-- <link rel="preload" as="font" type="font/woff2" href="/assets/font/playfair-var.woff2" crossorigin> -->
+  <!-- Preload Critical Fonts (LCP Optimization) -->
+  <!-- Inter Variable: Used for body text (most critical) -->
+  <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Playfair Display: Used for headings (defer to reduce initial load) -->
+  <!-- <link rel="preload" href="/fonts/PlayfairDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin> -->
 
   <!-- Primary Meta Tags -->
   <title>{title}</title>

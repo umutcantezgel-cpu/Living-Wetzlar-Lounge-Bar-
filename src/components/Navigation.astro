@@ -214,91 +214,51 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  // Navigation Mobile Menu Toggle
-  class NavigationMenu extends HTMLElement {
-    private toggle: HTMLButtonElement | null = null;
-    private menu: HTMLElement | null = null;
-    private links: NodeListOf<HTMLAnchorElement> | null = null;
+  // Navigation Mobile Menu Toggle - Optimized
+  (() => {
+    const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+    const menu = document.querySelector<HTMLElement>('.nav-menu');
+    const header = document.querySelector('.site-header');
 
-    constructor() {
-      super();
-    }
+    if (!toggle || !menu) return;
 
-    connectedCallback() {
-      this.toggle = this.querySelector('.nav-toggle');
-      this.menu = this.querySelector('.nav-menu');
-      this.links = this.querySelectorAll('.nav-link');
+    const closeMenu = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      menu.setAttribute('data-open', 'false');
+    };
 
-      if (this.toggle && this.menu) {
-        this.toggle.addEventListener('click', this.handleToggle.bind(this));
-        this.links?.forEach(link => {
-          link.addEventListener('click', this.handleLinkClick.bind(this));
-        });
+    const openMenu = () => {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Menü schließen');
+      menu.setAttribute('data-open', 'true');
+      menu.querySelector<HTMLAnchorElement>('.nav-link')?.focus();
+    };
 
-        // Close on Escape
-        document.addEventListener('keydown', this.handleEscape.bind(this));
+    // Toggle menu
+    toggle.addEventListener('click', () => {
+      toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
+    });
 
-        // Close on outside click
-        document.addEventListener('click', this.handleOutsideClick.bind(this));
+    // Close on link click
+    menu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        toggle.focus();
       }
-    }
+    });
 
-    private handleToggle() {
-      const isExpanded = this.toggle?.getAttribute('aria-expanded') === 'true';
-      this.toggle?.setAttribute('aria-expanded', String(!isExpanded));
-      this.menu?.setAttribute('data-open', String(!isExpanded));
-
-      if (!isExpanded) {
-        this.toggle?.setAttribute('aria-label', 'Menü schließen');
-        // Focus first link
-        this.links?.[0]?.focus();
-      } else {
-        this.toggle?.setAttribute('aria-label', 'Menü öffnen');
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (toggle.getAttribute('aria-expanded') === 'true' &&
+          !header?.contains(e.target as Node)) {
+        closeMenu();
       }
-    }
-
-    private handleLinkClick() {
-      // Close menu when link is clicked
-      this.toggle?.setAttribute('aria-expanded', 'false');
-      this.menu?.setAttribute('data-open', 'false');
-      this.toggle?.setAttribute('aria-label', 'Menü öffnen');
-    }
-
-    private handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape' && this.toggle?.getAttribute('aria-expanded') === 'true') {
-        this.handleToggle();
-        this.toggle?.focus();
-      }
-    }
-
-    private handleOutsideClick(event: Event) {
-      const target = event.target as Node;
-      if (
-        this.toggle?.getAttribute('aria-expanded') === 'true' &&
-        !this.contains(target)
-      ) {
-        this.handleToggle();
-      }
-    }
-
-    disconnectedCallback() {
-      this.toggle?.removeEventListener('click', this.handleToggle.bind(this));
-      document.removeEventListener('keydown', this.handleEscape.bind(this));
-      document.removeEventListener('click', this.handleOutsideClick.bind(this));
-    }
-  }
-
-  if (typeof window !== 'undefined' && !customElements.get('navigation-menu')) {
-    customElements.define('navigation-menu', NavigationMenu);
-  }
-
-  // Wrap navigation in custom element
-  document.addEventListener('DOMContentLoaded', () => {
-    const nav = document.querySelector('.site-header');
-    if (nav && !nav.closest('navigation-menu')) {
-      const wrapper = document.createElement('navigation-menu');
-      nav.parentNode?.insertBefore(wrapper, nav);
-      wrapper.appendChild(nav);
-    }
-  });
+    });
+  })();
 </script>

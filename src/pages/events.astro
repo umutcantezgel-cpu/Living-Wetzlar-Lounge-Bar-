@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Card from '../components/Card.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 
 const navItems = [
   { label: 'Startseite', href: '/' },
@@ -48,6 +49,9 @@ const upcomingEvents = [
   <Navigation items={navItems} />
 
   <main id="main-content">
+    <div class="container">
+      <Breadcrumb />
+    </div>
     <!-- Hero -->
     <section class="page-hero gradient-dark">
       <div class="container">

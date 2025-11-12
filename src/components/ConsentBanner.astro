@@ -222,91 +222,59 @@
 </style>
 
 <script>
-  // Consent Management
-  class ConsentManager {
-    private static readonly STORAGE_KEY = 'consent-preferences';
-    private static readonly VERSION = '1.0';
-
-    static hasConsent(): boolean {
-      return localStorage.getItem(this.STORAGE_KEY) !== null;
-    }
-
-    static getConsent() {
-      const stored = localStorage.getItem(this.STORAGE_KEY);
-      return stored ? JSON.parse(stored) : null;
-    }
-
-    static setConsent(categories: { essential: boolean; analytics: boolean; marketing: boolean }) {
-      const consent = {
-        version: this.VERSION,
-        timestamp: new Date().toISOString(),
-        categories
-      };
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(consent));
-
-      // Dispatch event
-      window.dispatchEvent(new CustomEvent('consent:changed', { detail: consent }));
-
-      // Apply consent (reload page to apply CSP changes)
-      window.location.reload();
-    }
-
-    static acceptAll() {
-      this.setConsent({ essential: true, analytics: true, marketing: true });
-    }
-
-    static rejectAll() {
-      this.setConsent({ essential: true, analytics: false, marketing: false });
-    }
-  }
-
-  // Initialize consent banner
-  document.addEventListener('DOMContentLoaded', () => {
+  // Consent Management - Optimized
+  (() => {
+    const KEY = 'consent-preferences';
     const banner = document.getElementById('consent-banner');
     const modal = document.getElementById('consent-modal');
 
-    if (!ConsentManager.hasConsent()) {
+    const saveConsent = (categories: { essential: boolean; analytics: boolean; marketing: boolean }) => {
+      localStorage.setItem(KEY, JSON.stringify({
+        version: '1.0',
+        timestamp: new Date().toISOString(),
+        categories
+      }));
+      window.dispatchEvent(new CustomEvent('consent:changed', { detail: categories }));
+      location.reload();
+    };
+
+    // Show banner if no consent
+    if (!localStorage.getItem(KEY)) {
       banner?.removeAttribute('hidden');
     }
 
-    // Accept all
+    // Accept/Reject
     document.getElementById('consent-accept')?.addEventListener('click', () => {
-      ConsentManager.acceptAll();
+      saveConsent({ essential: true, analytics: true, marketing: true });
     });
 
-    // Reject all
     document.getElementById('consent-reject')?.addEventListener('click', () => {
-      ConsentManager.rejectAll();
+      saveConsent({ essential: true, analytics: false, marketing: false });
     });
 
-    // Open settings
+    // Settings modal
     document.getElementById('consent-settings')?.addEventListener('click', () => {
       modal?.removeAttribute('hidden');
-      document.getElementById('consent-analytics')?.focus();
+      (document.getElementById('consent-analytics') as HTMLInputElement)?.focus();
     });
 
-    // Close modal
-    const closeModal = () => {
-      modal?.setAttribute('hidden', '');
-    };
+    const closeModal = () => modal?.setAttribute('hidden', '');
 
     document.getElementById('consent-modal-close-btn')?.addEventListener('click', closeModal);
     document.getElementById('consent-modal-cancel')?.addEventListener('click', closeModal);
     modal?.querySelector('.consent-modal-overlay')?.addEventListener('click', closeModal);
 
-    // Save settings
+    // Save custom settings
     document.getElementById('consent-form')?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const analytics = (document.getElementById('consent-analytics') as HTMLInputElement)?.checked || false;
-      const marketing = (document.getElementById('consent-marketing') as HTMLInputElement)?.checked || false;
-      ConsentManager.setConsent({ essential: true, analytics, marketing });
+      const analytics = (document.getElementById('consent-analytics') as HTMLInputElement)?.checked ?? false;
+      const marketing = (document.getElementById('consent-marketing') as HTMLInputElement)?.checked ?? false;
+      saveConsent({ essential: true, analytics, marketing });
     });
 
-    // Escape key to close modal
+    // Escape to close modal
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal?.hasAttribute('hidden')) {
-        closeModal();
-      }
+      if (e.key === 'Escape' && !modal?.hasAttribute('hidden')) closeModal();
     });
-  });
+  })();
 </script>

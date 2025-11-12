@@ -1,0 +1,71 @@
+---
+/**
+ * Trusted Types Policy Initialization
+ * Must be loaded BEFORE any other scripts to enforce CSP
+ * P0 Security Requirement
+ */
+---
+
+<script>
+  // Trusted Types Policy - Inline for earliest execution
+  (() => {
+    if (!window.trustedTypes) {
+      console.warn('[Security] Trusted Types not supported in this browser');
+      return;
+    }
+
+    if (window.trustedTypes.defaultPolicy) {
+      // Policy already exists
+      return;
+    }
+
+    try {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: (input) => {
+          // Block dangerous patterns: <script>, on* event handlers
+          const dangerous = /<script[\s>]|on\w+\s*=/gi;
+
+          if (dangerous.test(input)) {
+            console.error('[Trusted Types] Blocked dangerous HTML:', input.slice(0, 100));
+            return '';
+          }
+
+          return input;
+        },
+
+        createScript: (input) => {
+          // Block eval, Function constructor, dynamic imports
+          const dangerous = /\beval\s*\(|\bFunction\s*\(|import\s*\(/gi;
+
+          if (dangerous.test(input)) {
+            console.error('[Trusted Types] Blocked dangerous script:', input.slice(0, 100));
+            return '';
+          }
+
+          return input;
+        },
+
+        createScriptURL: (input) => {
+          // Only allow same-origin script URLs
+          try {
+            const url = new URL(input, window.location.origin);
+
+            if (url.origin !== window.location.origin) {
+              console.error('[Trusted Types] Blocked external script URL:', input);
+              return '';
+            }
+
+            return input;
+          } catch (e) {
+            console.error('[Trusted Types] Invalid script URL:', input);
+            return '';
+          }
+        }
+      });
+
+      console.log('[Security] Trusted Types policy initialized');
+    } catch (error) {
+      console.error('[Security] Failed to create Trusted Types policy:', error);
+    }
+  })();
+</script>

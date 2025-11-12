@@ -1,0 +1,57 @@
+/* ============================================
+   Font Declarations - Self-Hosted with Subsetting
+   P0 Optimization: DSGVO-compliant, no external requests
+   ============================================ */
+
+/* Inter Variable Font - Latin Subset Only */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/Inter-Variable.woff2') format('woff2');
+  unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F;
+  size-adjust: 100.06%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+/* Playfair Display - Regular */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
+  unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F;
+  size-adjust: 102.5%;
+  ascent-override: 85%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+/* Playfair Display - Bold */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/PlayfairDisplay-Bold.woff2') format('woff2');
+  unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F;
+  size-adjust: 102.5%;
+  ascent-override: 85%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+/* Fallback Font Metrics
+   These ensure minimal layout shift when fonts load
+   - size-adjust: Matches x-height of fallback to web font
+   - ascent-override: Matches ascender height
+   - descent-override: Matches descender height
+   - line-gap-override: Eliminates extra line spacing
+
+   Metrics calculated using:
+   https://seek-oss.github.io/capsize/
+*/

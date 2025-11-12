@@ -86,6 +86,33 @@
           "keywords": ["Cocktails", "Weine", "Spirituosen", "Bar-Snacks"],
           "canonical": "https://living-wetzlar.de/drinks-food"
         }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Living Wetzlar Speise- und Getränkekarte",
+        "description": "Premium-Cocktails, edle Weine und erlesene Snacks",
+        "provider": {
+          "@type": "BarOrPub",
+          "name": "Living Wetzlar Lounge Bar"
+        },
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Cocktails",
+            "description": "Handgefertigte Premium-Cocktails"
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Weine",
+            "description": "Edle Weine aus aller Welt"
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Spirituosen",
+            "description": "Hochwertige Spirituosen"
+          }
+        ]
       }
     },
     {
@@ -98,6 +125,26 @@
           "description": "Lernen Sie das Team hinter der Living Wetzlar Lounge Bar kennen. Unsere Geschichte, unsere Philosophie, unsere Leidenschaft.",
           "keywords": ["Über uns", "Team", "Geschichte", "Philosophie"],
           "canonical": "https://living-wetzlar.de/about"
+        }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Living Wetzlar Lounge Bar",
+          "foundingDate": "2020",
+          "description": "Premium Lounge Bar im Herzen von Wetzlar mit exklusiver Atmosphäre und erstklassigem Service",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Musterstraße 123",
+            "addressLocality": "Wetzlar",
+            "postalCode": "35578",
+            "addressCountry": "DE"
+          },
+          "telephone": "+49 6441 123456",
+          "email": "info@living-wetzlar.de",
+          "url": "https://living-wetzlar.de"
         }
       }
     },
@@ -134,6 +181,16 @@
           "keywords": ["Galerie", "Fotos", "Atmosphäre", "Impressionen"],
           "canonical": "https://living-wetzlar.de/gallery"
         }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Living Wetzlar Galerie",
+        "description": "Impressionen aus unserer Lounge Bar",
+        "about": {
+          "@type": "BarOrPub",
+          "name": "Living Wetzlar Lounge Bar"
+        }
       }
     },
     {
@@ -146,6 +203,27 @@
           "description": "Reservieren Sie jetzt Ihren Tisch in der Living Wetzlar Lounge Bar. Sichern Sie sich die besten Plätze für Ihren Besuch.",
           "keywords": ["Reservierung", "Tisch reservieren", "Buchung"],
           "canonical": "https://living-wetzlar.de/reservation"
+        }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Reservierung",
+        "description": "Tisch reservieren bei Living Wetzlar Lounge Bar",
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://living-wetzlar.de/reservation",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Reservation",
+            "name": "Tischreservierung"
+          }
         }
       }
     },
@@ -160,6 +238,23 @@
           "keywords": ["Kontakt", "Anfrage", "Nachricht"],
           "canonical": "https://living-wetzlar.de/contact"
         }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "mainEntity": {
+          "@type": "BarOrPub",
+          "name": "Living Wetzlar Lounge Bar",
+          "telephone": "+49 6441 123456",
+          "email": "info@living-wetzlar.de",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Musterstraße 123",
+            "addressLocality": "Wetzlar",
+            "postalCode": "35578",
+            "addressCountry": "DE"
+          }
+        }
       }
     },
     {
@@ -172,6 +267,16 @@
           "description": "Neuigkeiten, Cocktail-Rezepte, Event-Rückblicke und mehr aus der Living Wetzlar Lounge Bar.",
           "keywords": ["Blog", "News", "Cocktail-Rezepte", "Stories"],
           "canonical": "https://living-wetzlar.de/blog"
+        }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Living Wetzlar Blog",
+        "description": "News, Cocktail-Rezepte und Stories",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Living Wetzlar Lounge Bar"
         }
       }
     },

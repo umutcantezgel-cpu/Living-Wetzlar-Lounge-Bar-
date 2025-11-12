@@ -1,0 +1,148 @@
+---
+/**
+ * Breadcrumb Component with JSON-LD Support
+ * P1 SEO Enhancement: Provides navigation trail + structured data
+ */
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items?: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Auto-generate breadcrumbs if not provided
+const pathSegments = currentPath.split('/').filter(Boolean);
+const autoBreadcrumbs: BreadcrumbItem[] = [
+  { label: 'Startseite', href: '/' }
+];
+
+if (pathSegments.length > 0) {
+  let accumulatedPath = '';
+
+  const labelMap: Record<string, string> = {
+    'drinks-food': 'Getränke & Speisen',
+    'about': 'Über uns',
+    'events': 'Events',
+    'gallery': 'Galerie',
+    'reservation': 'Reservierung',
+    'contact': 'Kontakt',
+    'blog': 'Blog',
+    'impressum': 'Impressum',
+    'datenschutz': 'Datenschutz'
+  };
+
+  pathSegments.forEach((segment, index) => {
+    accumulatedPath += `/${segment}`;
+    const label = labelMap[segment] || segment;
+
+    // Don't link the current page
+    if (index === pathSegments.length - 1) {
+      autoBreadcrumbs.push({ label, href: '' });
+    } else {
+      autoBreadcrumbs.push({ label, href: accumulatedPath });
+    }
+  });
+}
+
+const breadcrumbs = items || autoBreadcrumbs;
+
+// Generate JSON-LD BreadcrumbList
+const breadcrumbList = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    'position': index + 1,
+    'name': item.label,
+    'item': item.href ? `https://living-wetzlar.de${item.href}` : undefined
+  }))
+};
+---
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <ol class="breadcrumb-list" vocab="https://schema.org/" typeof="BreadcrumbList">
+    {breadcrumbs.map((item, index) => (
+      <li property="itemListElement" typeof="ListItem" class="breadcrumb-item">
+        {item.href ? (
+          <a href={item.href} property="item" typeof="WebPage" class="breadcrumb-link">
+            <span property="name">{item.label}</span>
+          </a>
+        ) : (
+          <span property="name" aria-current="page" class="breadcrumb-current">
+            {item.label}
+          </span>
+        )}
+        <meta property="position" content={String(index + 1)} />
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />
+
+<style>
+  .breadcrumb {
+    padding: var(--space-4) 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-2);
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .breadcrumb-item:not(:last-child)::after {
+    content: '›';
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-lg);
+    margin-left: var(--space-2);
+  }
+
+  .breadcrumb-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-200) var(--ease-out);
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-sm);
+  }
+
+  .breadcrumb-current {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Responsive: Hide breadcrumb on very small screens */
+  @media (max-width: 480px) {
+    .breadcrumb {
+      display: none;
+    }
+  }
+</style>
