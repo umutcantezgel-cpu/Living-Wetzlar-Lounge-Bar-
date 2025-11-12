@@ -1,0 +1,36 @@
+---
+// Scroll Reveal Component - Adds intersection observer for animations
+---
+
+<script>
+  // Scroll Reveal IntersectionObserver
+  if (typeof window !== 'undefined') {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          // Optionally unobserve after revealing
+          // observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-reveal class
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.scroll-reveal, .scroll-fade-in');
+      elements.forEach(el => observer.observe(el));
+    });
+
+    // Also observe after dynamic content loads
+    if (document.readyState === 'complete') {
+      const elements = document.querySelectorAll('.scroll-reveal, .scroll-fade-in');
+      elements.forEach(el => observer.observe(el));
+    }
+  }
+</script>

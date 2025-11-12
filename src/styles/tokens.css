@@ -253,6 +253,79 @@
   --hero-min-height: 32rem;
   --hero-padding: var(--space-16) var(--space-6);
   --hero-overlay-opacity: 0.6;
+
+  /* === PREMIUM DESIGN FEATURES === */
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-dark: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 16px;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Premium Gradients */
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4DD8B 100%);
+  --gradient-dark: linear-gradient(135deg, #1A1A1A 0%, #262626 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  --gradient-shimmer: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 50%, transparent 100%);
+  --gradient-radial-gold: radial-gradient(circle at center, #D4AF37 0%, #967721 100%);
+
+  /* Premium Shadows (Layered) */
+  --shadow-premium:
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 8px 16px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.08);
+
+  --shadow-gold-glow:
+    0 0 20px rgba(212, 175, 55, 0.3),
+    0 0 40px rgba(212, 175, 55, 0.2),
+    0 0 60px rgba(212, 175, 55, 0.1);
+
+  --shadow-inset-subtle: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-text-subtle: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-text-strong: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  /* Advanced Animations */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* Backdrop Filters */
+  --backdrop-blur-sm: blur(4px);
+  --backdrop-blur-md: blur(8px);
+  --backdrop-blur-lg: blur(16px);
+  --backdrop-blur-xl: blur(24px);
+
+  /* Border Gradients */
+  --border-gradient-gold: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%);
+
+  /* Testimonial Component */
+  --testimonial-bg: var(--color-surface-base);
+  --testimonial-padding: var(--space-8);
+  --testimonial-radius: var(--radius-xl);
+  --testimonial-shadow: var(--shadow-premium);
+  --testimonial-quote-color: var(--color-brand-primary);
+
+  /* Gallery Component */
+  --gallery-gap: var(--space-4);
+  --gallery-item-radius: var(--radius-lg);
+  --gallery-overlay-bg: rgba(0, 0, 0, 0.7);
+
+  /* Pricing Component */
+  --pricing-card-bg: var(--color-surface-base);
+  --pricing-card-featured-bg: var(--color-brand-primary);
+  --pricing-card-radius: var(--radius-xl);
+  --pricing-card-shadow: var(--shadow-premium);
+
+  /* Stats Component */
+  --stats-number-color: var(--color-brand-primary);
+  --stats-label-color: var(--color-text-secondary);
+
+  /* Timeline Component */
+  --timeline-line-color: var(--color-brand-primary);
+  --timeline-dot-size: 1rem;
+  --timeline-spacing: var(--space-8);
 }
 
 /* Focus Styles (Accessibility) */

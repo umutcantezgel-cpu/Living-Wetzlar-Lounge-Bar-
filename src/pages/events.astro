@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+
+const upcomingEvents = [
+  {
+    title: 'Jazz Night mit Live-Band',
+    date: '15. Februar 2025',
+    time: '20:00 Uhr',
+    description: 'Genießen Sie einen Abend voller erstklassigem Jazz mit unserer Live-Band.',
+    image: '/assets/img/event-jazz.jpg'
+  },
+  {
+    title: 'Cocktail Masterclass',
+    date: '22. Februar 2025',
+    time: '18:00 Uhr',
+    description: 'Lernen Sie von unseren Mixologen die Kunst der perfekten Cocktail-Zubereitung.',
+    image: '/assets/img/event-cocktail.jpg'
+  },
+  {
+    title: 'Saturday Night DJ Session',
+    date: 'Jeden Samstag',
+    time: '22:00 Uhr',
+    description: 'Tanzen Sie zu den besten Beats unserer  resident DJs.',
+    image: '/assets/img/event-dj.jpg'
+  }
+];
+---
+
+<BaseLayout
+  title="Events & Veranstaltungen | Living Wetzlar"
+  description="Aktuelle Events, Live-Musik, DJ-Abende und private Feiern in der Living Wetzlar Lounge Bar."
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Events & Veranstaltungen</h1>
+        <p class="hero-description scroll-reveal">
+          Erleben Sie unvergessliche Abende mit Live-Musik, exklusiven Cocktail-Events und DJ-Nights
+        </p>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="events-section container">
+      <h2 class="section-title scroll-reveal">Kommende Events</h2>
+      <div class="events-grid">
+        {upcomingEvents.map((event) => (
+          <Card variant="elevated" hover="lift" className="event-card scroll-reveal">
+            <div class="event-image-placeholder gradient-gold"></div>
+            <div class="event-content">
+              <h3 class="event-title">{event.title}</h3>
+              <div class="event-meta">
+                <span class="event-date">📅 {event.date}</span>
+                <span class="event-time">🕐 {event.time}</span>
+              </div>
+              <p class="event-description">{event.description}</p>
+              <Button href="/reservation" variant="primary">Reservieren</Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+
+    <!-- Private Events CTA -->
+    <section class="private-events gradient-dark">
+      <div class="container">
+        <div class="private-content scroll-reveal">
+          <h2 class="private-title text-shadow-strong">Private Feiern & Firmenevents</h2>
+          <p class="private-description">
+            Feiern Sie Ihre besonderen Anlässe in unserem exklusiven Ambiente. Wir bieten maßgeschneiderte Pakete für private Veranstaltungen und Firmenevents.
+          </p>
+          <Button href="/contact" variant="primary" size="lg">Anfrage senden</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .events-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .events-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .events-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .event-image-placeholder {
+    width: 100%;
+    height: 12rem;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .event-content {
+    padding: var(--space-6);
+  }
+
+  .event-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+    color: var(--color-brand-primary);
+  }
+
+  .event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .event-description {
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .private-events {
+    padding: var(--space-20) var(--space-6);
+    color: var(--color-text-inverted);
+  }
+
+  .private-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .private-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-6);
+  }
+
+  .private-description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-8);
+    opacity: 0.9;
+  }
+</style>

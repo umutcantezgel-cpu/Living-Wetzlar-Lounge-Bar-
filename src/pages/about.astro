@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Stats from '../components/Stats.astro';
+import Testimonial from '../components/Testimonial.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+
+const stats = [
+  { number: '10', suffix: '+', label: 'Jahre Erfahrung' },
+  { number: '500', suffix: '+', label: 'Premium Cocktails' },
+  { number: '50', suffix: '+', label: 'Events pro Jahr' },
+  { number: '4.9', suffix: '★', label: 'Durchschn. Bewertung' }
+];
+
+const testimonials = [
+  {
+    quote: 'Die beste Bar in Wetzlar! Exzellenter Service, großartige Atmosphäre und die Cocktails sind einfach perfekt.',
+    author: 'Sarah M.',
+    role: 'Stammgast',
+    rating: 5
+  },
+  {
+    quote: 'Wir haben hier unsere Firmenfeier ausgerichtet und es war absolut fantastisch. Das Team hat jeden Wunsch erfüllt.',
+    author: 'Michael K.',
+    role: 'Firmenkunde',
+    rating: 5
+  },
+  {
+    quote: 'Stilvolles Ambiente, professionelle Mixologen und eine unvergleichliche Getränkeauswahl. Immer wieder gerne!',
+    author: 'Julia R.',
+    role: 'Gast',
+    rating: 5
+  }
+];
+---
+
+<BaseLayout
+  title="Über uns – Das Living Wetzlar Team | Living Wetzlar"
+  description="Lernen Sie das Team hinter der Living Wetzlar Lounge Bar kennen. Unsere Geschichte, unsere Philosophie, unsere Leidenschaft."
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Über Living Wetzlar</h1>
+        <p class="hero-description scroll-reveal">
+          Premium Lounge Bar Experience seit 2014
+        </p>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section container">
+      <div class="story-content scroll-reveal">
+        <h2 class="section-title">Unsere Geschichte</h2>
+        <div class="story-text">
+          <p>
+            Seit 2014 steht das Living Wetzlar für exklusive Atmosphäre, erstklassige Getränke und unvergessliche Abende im Herzen von Wetzlar. Was als Vision begann, eine Lounge Bar der Extraklasse zu schaffen, hat sich zu einem der beliebtesten Treffpunkte der Region entwickelt.
+          </p>
+          <p>
+            Unser erfahrenes Team aus professionellen Mixologen kreiert täglich handgefertigte Cocktails mit den besten Zutaten. Jedes Getränk ist ein Kunstwerk, jeder Abend ein besonderes Erlebnis.
+          </p>
+          <p>
+            Die Kombination aus elegantem Ambiente, erstklassigem Service und regelmäßigen Live-Events macht das Living Wetzlar zu mehr als nur einer Bar – es ist ein Ort, an dem Momente zu Erinnerungen werden.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section gradient-gold">
+      <div class="container">
+        <Stats stats={stats} centered={true} />
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section container">
+      <h2 class="section-title scroll-reveal">Unser Team</h2>
+      <div class="team-grid">
+        <div class="team-member scroll-reveal">
+          <div class="member-image-placeholder gradient-dark"></div>
+          <h3 class="member-name">Max Mustermann</h3>
+          <p class="member-role">Geschäftsführer</p>
+        </div>
+        <div class="team-member scroll-reveal">
+          <div class="member-image-placeholder gradient-dark"></div>
+          <h3 class="member-name">Anna Schmidt</h3>
+          <p class="member-role">Head Mixologist</p>
+        </div>
+        <div class="team-member scroll-reveal">
+          <div class="member-image-placeholder gradient-dark"></div>
+          <h3 class="member-name">Tom Weber</h3>
+          <p class="member-role">Event Manager</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">Was unsere Gäste sagen</h2>
+        <div class="testimonials-grid">
+          {testimonials.map((testimonial) => (
+            <Testimonial {...testimonial} />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .story-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+  }
+
+  .story-content {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .story-text {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .story-text p {
+    margin-bottom: var(--space-6);
+  }
+
+  .stats-section {
+    padding: var(--space-20) var(--space-6);
+    color: var(--color-white);
+  }
+
+  .team-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .member-image-placeholder {
+    width: 12rem;
+    height: 12rem;
+    border-radius: var(--radius-full);
+    margin: 0 auto var(--space-4);
+  }
+
+  .member-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+  }
+
+  .member-role {
+    color: var(--color-brand-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .testimonials-section {
+    padding: var(--space-20) var(--space-6);
+    background-color: var(--color-surface-secondary);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+interface Stat {
+  number: string;
+  label: string;
+  suffix?: string;
+}
+
+interface Props {
+  stats: Stat[];
+  centered?: boolean;
+}
+
+const { stats, centered = false } = Astro.props;
+---
+
+<div class={`stats-grid ${centered ? 'centered' : ''}`}>
+  {stats.map((stat) => (
+    <div class="stat-item scroll-reveal">
+      <div class="stat-number gradient-text">
+        {stat.number}{stat.suffix && <span class="stat-suffix">{stat.suffix}</span>}
+      </div>
+      <div class="stat-label">{stat.label}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .stats-grid.centered {
+    text-align: center;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .stat-number {
+    font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    font-family: var(--text-heading-font);
+    line-height: 1;
+  }
+
+  .stat-suffix {
+    font-size: 0.6em;
+    margin-left: 0.125em;
+  }
+
+  .stat-label {
+    font-size: var(--font-size-base);
+    color: var(--stats-label-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-medium);
+  }
+</style>

@@ -1,0 +1,29 @@
+{
+  "name": "Living Wetzlar Lounge Bar",
+  "short_name": "Living Wetzlar",
+  "description": "Premium Lounge Bar im Herzen von Wetzlar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1A1A1A",
+  "theme_color": "#D4AF37",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle"],
+  "lang": "de-DE",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
