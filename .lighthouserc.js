@@ -12,40 +12,46 @@ module.exports = {
         'http://localhost:4321/contact',
         'http://localhost:4321/404'
       ],
-      numberOfRuns: 3,
+      numberOfRuns: 5,
       settings: {
         preset: 'desktop',
+        // Mobile-first testing (Weltmeisterniveau)
+        formFactor: 'mobile',
         throttling: {
-          rttMs: 40,
-          throughputKbps: 10240,
-          cpuSlowdownMultiplier: 1
+          rttMs: 150,
+          throughputKbps: 1638,
+          cpuSlowdownMultiplier: 4
         },
         screenEmulation: {
-          mobile: false,
-          width: 1350,
-          height: 940,
-          deviceScaleFactor: 1,
+          mobile: true,
+          width: 375,
+          height: 667,
+          deviceScaleFactor: 2,
           disabled: false
-        }
+        },
+        emulatedUserAgent: 'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36'
       }
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.95 }],
+        // Weltmeisterniveau: ≥98 für alle Kategorien
+        'categories:performance': ['error', { minScore: 0.98 }],
         'categories:accessibility': ['error', { minScore: 1.0 }],
-        'categories:best-practices': ['error', { minScore: 0.95 }],
-        'categories:seo': ['error', { minScore: 0.95 }],
+        'categories:best-practices': ['error', { minScore: 0.98 }],
+        'categories:seo': ['error', { minScore: 0.98 }],
 
-        // Core Web Vitals
-        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
-        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
-        'total-blocking-time': ['error', { maxNumericValue: 200 }],
+        // Core Web Vitals (Top 1-5% Ziele)
+        'largest-contentful-paint': ['error', { maxNumericValue: 1800 }], // 1.8s
+        'cumulative-layout-shift': ['error', { maxNumericValue: 0.08 }], // 0.08
+        'total-blocking-time': ['error', { maxNumericValue: 150 }], // 150ms
+        'max-potential-fid': ['error', { maxNumericValue: 100 }], // 100ms
 
-        // Performance budgets
-        'resource-summary:script:size': ['error', { maxNumericValue: 51200 }], // 50KB
-        'resource-summary:stylesheet:size': ['warn', { maxNumericValue: 30720 }], // 30KB
+        // Performance budgets (Weltmeisterniveau)
+        'resource-summary:script:size': ['error', { maxNumericValue: 35840 }], // 35KB
+        'resource-summary:stylesheet:size': ['error', { maxNumericValue: 46080 }], // 45KB
         'resource-summary:font:size': ['error', { maxNumericValue: 102400 }], // 100KB
         'resource-summary:image:size': ['warn', { maxNumericValue: 512000 }], // 500KB
+        'resource-summary:total:size': ['warn', { maxNumericValue: 1048576 }], // 1MB total
 
         // Security
         'is-on-https': 'error',

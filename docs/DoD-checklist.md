@@ -1,32 +1,35 @@
-# Definition of Done (DoD) – Checkliste
+# Definition of Done (DoD) – Weltmeisterniveau Checkliste
 
-**Projekt**: Living Wetzlar Lounge Bar – Enterprise Website
-**Version**: 1.0.0
+**Projekt**: Living Wetzlar Lounge Bar – **Weltmeister-Edition**
+**Version**: 2.0.0 (Top 1-5% Upgrade)
 **Datum**: 2025-01-12
 
-Diese Checkliste definiert die **nicht verhandelbaren Mindestanforderungen** für das Projekt. Alle Punkte müssen mit ✅ markiert sein, bevor ein Deployment erfolgen darf.
+Diese Checkliste definiert **Weltmeisterniveau-Standards (Top 1-5%)**. Alle Punkte müssen mit ✅ markiert sein, bevor ein Deployment erfolgen darf.
 
 ---
 
-## 🎯 Performance & Core Web Vitals
+## 🏆 Performance & Core Web Vitals (Weltmeisterniveau)
 
 ### Lighthouse Scores (Mobile, p75)
-- [ ] **Performance**: ≥ 95
-- [ ] **Accessibility**: ≥ 100
-- [ ] **Best Practices**: ≥ 95
-- [ ] **SEO**: ≥ 95
+- [ ] **Performance**: ≥ **98** (nicht 95!)
+- [ ] **Accessibility**: **100** (Perfect Score)
+- [ ] **Best Practices**: ≥ **98** (nicht 95!)
+- [ ] **SEO**: ≥ **98** (nicht 95!)
 
-### Core Web Vitals (p75)
-- [ ] **LCP (Largest Contentful Paint)**: ≤ 2,5 s
-- [ ] **INP (Interaction to Next Paint)**: ≤ 200 ms
-- [ ] **CLS (Cumulative Layout Shift)**: ≤ 0,1
+### Core Web Vitals (p75) – Top 1-5% Targets
+- [ ] **LCP (Largest Contentful Paint)**: ≤ **1,8 s** (nicht 2,5s!)
+- [ ] **INP (Interaction to Next Paint)**: ≤ **150 ms** (nicht 200ms!)
+- [ ] **CLS (Cumulative Layout Shift)**: ≤ **0,08** (nicht 0,1!)
+- [ ] **TBT (Total Blocking Time)**: ≤ **150 ms**
 
-### Performance-Budgets
-- [ ] **JavaScript**: ≤ 50 KB/Seite
-- [ ] **CSS**: ≤ 30 KB/Seite
-- [ ] **Fonts**: ≤ 100 KB total (self-hosted WOFF2)
-- [ ] **Images**: ≤ 500 KB/Seite
-- [ ] **Critical Assets**: Preloaded (Hero-Bild, Fonts)
+### Performance-Budgets (Weltmeisterniveau)
+- [ ] **JavaScript**: ≤ **35 KB**/Seite (nicht 50KB!)
+- [ ] **CSS**: ≤ **45 KB**/Seite (strenger!)
+- [ ] **Fonts**: ≤ 100 KB total (self-hosted WOFF2 + Variable Fonts)
+- [ ] **Images**: ≤ 500 KB/Seite (AVIF/WebP preferred)
+- [ ] **Total Page Weight**: ≤ 1 MB
+- [ ] **Critical Assets**: Preloaded mit `fetchpriority="high"`
+- [ ] **Font-Display**: `swap` + `size-adjust` gesetzt
 
 ---
 

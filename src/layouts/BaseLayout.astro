@@ -29,16 +29,32 @@ const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Critical Performance Hints -->
+  <link rel="preconnect" href={siteUrl} crossorigin>
+  <link rel="dns-prefetch" href={siteUrl}>
+
+  <!-- Preload Critical Assets (LCP Optimization) -->
+  <!-- TODO: Add actual font files once hosted -->
+  <!-- <link rel="preload" as="font" type="font/woff2" href="/assets/font/inter-var.woff2" crossorigin> -->
+  <!-- <link rel="preload" as="font" type="font/woff2" href="/assets/font/playfair-var.woff2" crossorigin> -->
 
   <!-- Primary Meta Tags -->
   <title>{title}</title>
-  <meta name="title" content={title}>
   <meta name="description" content={description}>
-  <meta name="robots" content={robots}>
   <link rel="canonical" href={fullCanonical}>
+  <meta name="robots" content={robots}>
 
-  <!-- Open Graph / Facebook -->
+  <!-- Theme Color (Critical for PWA) -->
+  <meta name="theme-color" content="#D4AF37">
+
+  <!-- Favicon (Optimized Order) -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Web Manifest -->
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph / Facebook (Deferred) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content={fullCanonical}>
   <meta property="og:title" content={title}>
@@ -47,25 +63,15 @@ const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
   <meta property="og:locale" content={lang}>
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content={fullCanonical}>
-  <meta property="twitter:title" content={title}>
-  <meta property="twitter:description" content={description}>
-  <meta property="twitter:image" content={ogImage}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={fullCanonical}>
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage}>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <!-- Additional Icons -->
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <!-- Web Manifest -->
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#D4AF37">
-
-  <!-- Preconnect (if needed for consent-approved resources) -->
-  <!-- <link rel="preconnect" href="https://..." crossorigin> -->
 
   <!-- Structured Data -->
   {structuredData && (
