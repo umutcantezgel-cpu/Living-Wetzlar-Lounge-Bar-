@@ -1,0 +1,67 @@
+---
+/**
+ * Service Worker Registration
+ * P1 Feature: Pre-Caching + Offline Capability
+ */
+---
+
+<script>
+  // Service Worker Registration - Progressive Enhancement
+  (() => {
+    if ('serviceWorker' in navigator) {
+      // Wait for page load to avoid delaying LCP
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js', {
+            scope: '/'
+          })
+          .then((registration) => {
+            console.log('[SW] Registration successful, scope:', registration.scope);
+
+            // Check for updates periodically
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+
+              if (newWorker) {
+                console.log('[SW] New version found, installing...');
+
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('[SW] New version installed, refresh required');
+
+                    // Optional: Show update notification to user
+                    // You can implement a custom notification here
+                    const shouldReload = confirm(
+                      'Eine neue Version der Website ist verfügbar. Jetzt aktualisieren?'
+                    );
+
+                    if (shouldReload) {
+                      newWorker.postMessage({ type: 'SKIP_WAITING' });
+                      window.location.reload();
+                    }
+                  }
+                });
+              }
+            });
+
+            // Auto-update check every hour
+            setInterval(() => {
+              registration.update();
+            }, 3600000); // 1 hour
+          })
+          .catch((error) => {
+            console.error('[SW] Registration failed:', error);
+          });
+
+        // Handle controller change (new SW took control)
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          console.log('[SW] New service worker took control');
+          // Optionally reload the page to ensure fresh content
+          // window.location.reload();
+        });
+      });
+    } else {
+      console.log('[SW] Service Workers not supported');
+    }
+  })();
+</script>

@@ -2,6 +2,7 @@
 import '../styles/fonts.css';
 import '../styles/global.css';
 import TrustedTypesInit from '../components/TrustedTypesInit.astro';
+import ServiceWorkerInit from '../components/ServiceWorkerInit.astro';
 
 interface Props {
   title: string;
@@ -99,5 +100,8 @@ const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
       <p>Diese Website funktioniert am besten mit aktiviertem JavaScript.</p>
     </div>
   </noscript>
+
+  <!-- Service Worker Registration (deferred to avoid blocking) -->
+  <ServiceWorkerInit />
 </body>
 </html>
