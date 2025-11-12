@@ -78,14 +78,38 @@ const classes = `btn btn-${variant} btn-${size} ${fullWidth ? 'btn-full-width' :
 
   /* Variants */
   .btn-primary {
-    background-color: var(--color-brand-primary);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #D4AF37 0%, #B8942A 100%);
     color: var(--color-white);
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
   }
 
   .btn-primary:hover:not(:disabled) {
-    background-color: var(--color-brand-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #E4B724 0%, #D4AF37 100%);
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 20px rgba(212, 175, 55, 0.5),
+      0 0 30px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Ripple Effect on Click */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-primary:active::after {
+    width: 300px;
+    height: 300px;
   }
 
   .btn-secondary {
