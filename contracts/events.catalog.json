@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "events": [
+    {
+      "id": "consent.changed",
+      "type": "com.livingwetzlar.consent.changed.v1",
+      "description": "Fired when user changes consent preferences",
+      "source": "/consent-manager",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "categories": {
+            "type": "object",
+            "properties": {
+              "essential": { "type": "boolean" },
+              "analytics": { "type": "boolean" },
+              "marketing": { "type": "boolean" }
+            }
+          },
+          "version": { "type": "string" }
+        }
+      }
+    },
+    {
+      "id": "form.submit",
+      "type": "com.livingwetzlar.form.submit.v1",
+      "description": "Fired when a form is submitted",
+      "source": "/forms/*",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "formId": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "success": { "type": "boolean" },
+          "errors": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "id": "navigation.click",
+      "type": "com.livingwetzlar.navigation.click.v1",
+      "description": "Fired when navigation link is clicked",
+      "source": "/navigation",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    {
+      "id": "modal.open",
+      "type": "com.livingwetzlar.modal.open.v1",
+      "description": "Fired when modal is opened",
+      "source": "/modal",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "modalId": { "type": "string" },
+          "trigger": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    {
+      "id": "modal.close",
+      "type": "com.livingwetzlar.modal.close.v1",
+      "description": "Fired when modal is closed",
+      "source": "/modal",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "modalId": { "type": "string" },
+          "method": { "type": "string", "enum": ["button", "escape", "backdrop", "programmatic"] },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    {
+      "id": "embed.load",
+      "type": "com.livingwetzlar.embed.load.v1",
+      "description": "Fired when two-click embed is activated",
+      "source": "/two-click-embed",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "provider": { "type": "string", "enum": ["youtube", "google-maps", "instagram"] },
+          "embedId": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    {
+      "id": "error.client",
+      "type": "com.livingwetzlar.error.client.v1",
+      "description": "Fired when client-side error occurs",
+      "source": "/error-handler",
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "stack": { "type": "string" },
+          "url": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "userAgent": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

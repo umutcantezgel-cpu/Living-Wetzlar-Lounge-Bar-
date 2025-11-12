@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  robots?: string;
+  structuredData?: object;
+  lang?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  robots = 'index, follow',
+  structuredData,
+  lang = 'de-DE'
+} = Astro.props;
+
+const siteUrl = 'https://living-wetzlar.de';
+const fullCanonical = canonical || `${siteUrl}${Astro.url.pathname}`;
+const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title}>
+  <meta name="description" content={description}>
+  <meta name="robots" content={robots}>
+  <link rel="canonical" href={fullCanonical}>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={fullCanonical}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:locale" content={lang}>
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content={fullCanonical}>
+  <meta property="twitter:title" content={title}>
+  <meta property="twitter:description" content={description}>
+  <meta property="twitter:image" content={ogImage}>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Web Manifest -->
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#D4AF37">
+
+  <!-- Preconnect (if needed for consent-approved resources) -->
+  <!-- <link rel="preconnect" href="https://..." crossorigin> -->
+
+  <!-- Structured Data -->
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+</head>
+<body>
+  <!-- Skip to main content link -->
+  <a href="#main-content" class="skip-link">
+    Zum Hauptinhalt springen
+  </a>
+
+  <!-- Slot for page content -->
+  <slot />
+
+  <!-- No JavaScript Warning -->
+  <noscript>
+    <div class="no-js-warning" role="alert">
+      <p>Diese Website funktioniert am besten mit aktiviertem JavaScript.</p>
+    </div>
+  </noscript>
+</body>
+</html>

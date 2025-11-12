@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "componentId": "button",
+  "version": "1.0.0",
+  "description": "Accessible button component with multiple variants",
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Minimum touch target 24x24 CSS pixels",
+      "Visible focus indicator (ring)",
+      "Keyboard accessible (Enter/Space)",
+      "ARIA label when icon-only",
+      "Disabled state communicated via aria-disabled"
+    ],
+    "roles": ["button"],
+    "keyboardNavigation": {
+      "Enter": "Activate button",
+      "Space": "Activate button"
+    }
+  },
+  "performance": {
+    "jsWeight": 0,
+    "cssWeight": "~2KB",
+    "renderCost": "low",
+    "criticalCSS": true
+  },
+  "consent": {
+    "required": false,
+    "category": "essential"
+  },
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary", "outline", "ghost", "danger"],
+      "default": "primary"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg"],
+      "default": "md"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "loading": {
+      "type": "boolean",
+      "default": false
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "ariaLabel": {
+      "type": "string",
+      "required": "conditional (icon-only)"
+    }
+  },
+  "styling": {
+    "tokens": {
+      "color": ["brand-primary", "brand-secondary", "semantic-error"],
+      "spacing": ["2", "3", "4", "6"],
+      "fontSize": ["sm", "base", "lg"],
+      "borderRadius": ["md", "lg"],
+      "transition": ["200"]
+    }
+  }
+}

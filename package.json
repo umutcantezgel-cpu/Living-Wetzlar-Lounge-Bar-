@@ -1,0 +1,48 @@
+{
+  "name": "living-wetzlar-lounge-bar",
+  "version": "1.0.0",
+  "description": "Premium Enterprise Website für Living Wetzlar Lounge Bar",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lhci": "lhci autorun",
+    "a11y": "npm run a11y:axe && npm run a11y:pa11y",
+    "a11y:axe": "node scripts/axe-check.js",
+    "a11y:pa11y": "pa11y-ci --config .pa11yci.json",
+    "links": "node scripts/link-checker.js",
+    "sri:gen": "node scripts/gen-sri.js",
+    "sri:verify": "node scripts/verify-sri.js",
+    "security": "npm run security:headers && npm run security:inline",
+    "security:headers": "node scripts/security-headers-check.js",
+    "security:inline": "node scripts/no-inline-scanner.js",
+    "reports": "node scripts/generate-reports.js",
+    "validate:contracts": "node scripts/validate-contracts.js",
+    "test": "npm run validate:contracts && npm run build",
+    "ci": "npm run build && npm run lhci && npm run a11y && npm run links && npm run sri:verify && npm run security"
+  },
+  "dependencies": {
+    "astro": "^4.15.0",
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^5.5.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@lhci/cli": "^0.14.0",
+    "ajv": "^8.17.0",
+    "axe-core": "^4.10.0",
+    "glob": "^11.0.0",
+    "jsdom": "^25.0.0",
+    "pa11y-ci": "^3.1.0",
+    "playwright": "^1.47.0",
+    "tailwindcss": "^3.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

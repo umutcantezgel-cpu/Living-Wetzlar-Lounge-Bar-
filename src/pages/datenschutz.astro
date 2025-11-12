@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Kontakt', href: '/contact' }
+];
+---
+
+<BaseLayout
+  title="Datenschutzerklärung | Living Wetzlar"
+  description="Datenschutzerklärung und Informationen zum Umgang mit personenbezogenen Daten."
+  robots="noindex, follow"
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content" class="container legal-page">
+    <h1>Datenschutzerklärung</h1>
+
+    <section>
+      <h2>1. Datenschutz auf einen Blick</h2>
+      <h3>Allgemeine Hinweise</h3>
+      <p>
+        Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Verantwortlicher</h2>
+      <p>
+        Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br><br>
+        Living Wetzlar Lounge Bar GmbH<br>
+        Musterstraße 123<br>
+        35578 Wetzlar<br>
+        Deutschland<br><br>
+        E-Mail: <a href="mailto:datenschutz@living-wetzlar.de">datenschutz@living-wetzlar.de</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Hosting</h2>
+      <h3>Externes Hosting</h3>
+      <p>
+        Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Cookies</h2>
+      <p>
+        Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Einige Cookies sind technisch notwendig, andere dienen zu Analyse- oder Marketingzwecken und werden nur mit Ihrer Einwilligung gesetzt.
+      </p>
+      <p>
+        Sie können Ihre Cookie-Einstellungen jederzeit über unseren Cookie-Banner anpassen.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Datenerfassung auf dieser Website</h2>
+      <h3>Server-Log-Dateien</h3>
+      <p>
+        Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
+      </p>
+      <ul>
+        <li>Browsertyp und Browserversion</li>
+        <li>Verwendetes Betriebssystem</li>
+        <li>Referrer URL</li>
+        <li>Hostname des zugreifenden Rechners</li>
+        <li>Uhrzeit der Serveranfrage</li>
+        <li>IP-Adresse</li>
+      </ul>
+      <p>
+        Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Kontaktformular</h2>
+      <p>
+        Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Ihre Rechte</h2>
+      <p>Sie haben jederzeit das Recht:</p>
+      <ul>
+        <li>gemäß Art. 15 DSGVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen</li>
+        <li>gemäß Art. 16 DSGVO die Berichtigung unrichtiger Daten zu verlangen</li>
+        <li>gemäß Art. 17 DSGVO die Löschung Ihrer Daten zu verlangen</li>
+        <li>gemäß Art. 18 DSGVO die Einschränkung der Verarbeitung zu verlangen</li>
+        <li>gemäß Art. 20 DSGVO Ihre Daten in einem strukturierten Format zu erhalten</li>
+        <li>gemäß Art. 77 DSGVO sich bei einer Aufsichtsbehörde zu beschweren</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>8. Widerruf Ihrer Einwilligung</h2>
+      <p>
+        Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+      </p>
+    </section>
+
+    <p class="update-date">Stand: {new Date().toLocaleDateString('de-DE')}</p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: var(--space-12) var(--space-6);
+    max-width: 48rem;
+  }
+
+  .legal-page h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-8);
+  }
+
+  .legal-page h2 {
+    font-size: var(--font-size-2xl);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+    color: var(--color-brand-primary);
+  }
+
+  .legal-page h3 {
+    font-size: var(--font-size-xl);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-page section {
+    margin-bottom: var(--space-6);
+  }
+
+  .legal-page p, .legal-page ul {
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-page ul {
+    padding-left: var(--space-6);
+  }
+
+  .legal-page li {
+    margin-bottom: var(--space-2);
+  }
+
+  .update-date {
+    margin-top: var(--space-8);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,229 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "/",
+      "priority": 1.0,
+      "changefreq": "weekly",
+      "languages": {
+        "de-DE": {
+          "title": "Living Wetzlar – Premium Lounge Bar in Wetzlar",
+          "description": "Erleben Sie exklusive Atmosphäre in der Living Wetzlar Lounge Bar. Premium-Cocktails, edle Weine und unvergessliche Events im Herzen von Wetzlar.",
+          "keywords": ["Lounge Bar Wetzlar", "Cocktailbar", "Events Wetzlar", "Premium Bar"],
+          "canonical": "https://living-wetzlar.de/",
+          "hreflang": [
+            { "lang": "de-DE", "url": "https://living-wetzlar.de/" },
+            { "lang": "en-US", "url": "https://living-wetzlar.de/en/" }
+          ]
+        },
+        "en-US": {
+          "title": "Living Wetzlar – Premium Lounge Bar in Wetzlar",
+          "description": "Experience exclusive atmosphere at Living Wetzlar Lounge Bar. Premium cocktails, fine wines and unforgettable events in the heart of Wetzlar.",
+          "keywords": ["Lounge Bar Wetzlar", "Cocktail Bar", "Events Wetzlar", "Premium Bar"],
+          "canonical": "https://living-wetzlar.de/en/",
+          "hreflang": [
+            { "lang": "de-DE", "url": "https://living-wetzlar.de/" },
+            { "lang": "en-US", "url": "https://living-wetzlar.de/en/" }
+          ]
+        }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "BarOrPub",
+        "name": "Living Wetzlar Lounge Bar",
+        "image": "https://living-wetzlar.de/assets/img/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Musterstraße 123",
+          "addressLocality": "Wetzlar",
+          "postalCode": "35578",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "50.5558",
+          "longitude": "8.5005"
+        },
+        "telephone": "+49 6441 123456",
+        "email": "info@living-wetzlar.de",
+        "priceRange": "€€€",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+            "opens": "17:00",
+            "closes": "01:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Thursday"],
+            "opens": "17:00",
+            "closes": "02:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday", "Saturday"],
+            "opens": "17:00",
+            "closes": "03:00"
+          }
+        ],
+        "servesCuisine": "Cocktails, Fine Beverages",
+        "sameAs": [
+          "https://instagram.com/livingwetzlar",
+          "https://facebook.com/livingwetzlar"
+        ]
+      }
+    },
+    {
+      "path": "/drinks-food",
+      "priority": 0.9,
+      "changefreq": "monthly",
+      "languages": {
+        "de-DE": {
+          "title": "Getränke & Speisen – Unsere Auswahl",
+          "description": "Entdecken Sie unsere exklusive Auswahl an Premium-Cocktails, edlen Weinen, Spirituosen und erlesenen Snacks.",
+          "keywords": ["Cocktails", "Weine", "Spirituosen", "Bar-Snacks"],
+          "canonical": "https://living-wetzlar.de/drinks-food"
+        }
+      }
+    },
+    {
+      "path": "/about",
+      "priority": 0.8,
+      "changefreq": "yearly",
+      "languages": {
+        "de-DE": {
+          "title": "Über uns – Das Living Wetzlar Team",
+          "description": "Lernen Sie das Team hinter der Living Wetzlar Lounge Bar kennen. Unsere Geschichte, unsere Philosophie, unsere Leidenschaft.",
+          "keywords": ["Über uns", "Team", "Geschichte", "Philosophie"],
+          "canonical": "https://living-wetzlar.de/about"
+        }
+      }
+    },
+    {
+      "path": "/events",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "languages": {
+        "de-DE": {
+          "title": "Events & Veranstaltungen",
+          "description": "Aktuelle Events, Live-Musik, DJ-Abende und private Feiern in der Living Wetzlar Lounge Bar.",
+          "keywords": ["Events", "Veranstaltungen", "Live-Musik", "Private Feiern"],
+          "canonical": "https://living-wetzlar.de/events"
+        }
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "EventSeries",
+        "name": "Living Wetzlar Events",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Living Wetzlar Lounge Bar"
+        }
+      }
+    },
+    {
+      "path": "/gallery",
+      "priority": 0.7,
+      "changefreq": "monthly",
+      "languages": {
+        "de-DE": {
+          "title": "Galerie – Impressionen aus dem Living Wetzlar",
+          "description": "Erleben Sie die einzigartige Atmosphäre unserer Lounge Bar in Bildern.",
+          "keywords": ["Galerie", "Fotos", "Atmosphäre", "Impressionen"],
+          "canonical": "https://living-wetzlar.de/gallery"
+        }
+      }
+    },
+    {
+      "path": "/reservation",
+      "priority": 0.85,
+      "changefreq": "monthly",
+      "languages": {
+        "de-DE": {
+          "title": "Reservierung – Tisch reservieren",
+          "description": "Reservieren Sie jetzt Ihren Tisch in der Living Wetzlar Lounge Bar. Sichern Sie sich die besten Plätze für Ihren Besuch.",
+          "keywords": ["Reservierung", "Tisch reservieren", "Buchung"],
+          "canonical": "https://living-wetzlar.de/reservation"
+        }
+      }
+    },
+    {
+      "path": "/contact",
+      "priority": 0.8,
+      "changefreq": "yearly",
+      "languages": {
+        "de-DE": {
+          "title": "Kontakt – Sprechen Sie uns an",
+          "description": "Kontaktieren Sie uns für Reservierungen, Events oder allgemeine Anfragen. Wir freuen uns auf Ihre Nachricht.",
+          "keywords": ["Kontakt", "Anfrage", "Nachricht"],
+          "canonical": "https://living-wetzlar.de/contact"
+        }
+      }
+    },
+    {
+      "path": "/blog",
+      "priority": 0.7,
+      "changefreq": "weekly",
+      "languages": {
+        "de-DE": {
+          "title": "Blog – News & Stories",
+          "description": "Neuigkeiten, Cocktail-Rezepte, Event-Rückblicke und mehr aus der Living Wetzlar Lounge Bar.",
+          "keywords": ["Blog", "News", "Cocktail-Rezepte", "Stories"],
+          "canonical": "https://living-wetzlar.de/blog"
+        }
+      }
+    },
+    {
+      "path": "/impressum",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "languages": {
+        "de-DE": {
+          "title": "Impressum",
+          "description": "Impressum und rechtliche Angaben der Living Wetzlar Lounge Bar.",
+          "canonical": "https://living-wetzlar.de/impressum"
+        }
+      },
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/datenschutz",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "languages": {
+        "de-DE": {
+          "title": "Datenschutzerklärung",
+          "description": "Datenschutzerklärung und Informationen zum Umgang mit personenbezogenen Daten.",
+          "canonical": "https://living-wetzlar.de/datenschutz"
+        }
+      },
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/404",
+      "priority": 0.1,
+      "changefreq": "never",
+      "languages": {
+        "de-DE": {
+          "title": "404 – Seite nicht gefunden",
+          "description": "Die angeforderte Seite wurde nicht gefunden."
+        }
+      },
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/503",
+      "priority": 0.1,
+      "changefreq": "never",
+      "languages": {
+        "de-DE": {
+          "title": "503 – Wartungsarbeiten",
+          "description": "Die Website befindet sich derzeit in Wartung."
+        }
+      },
+      "robots": "noindex, nofollow"
+    }
+  ]
+}

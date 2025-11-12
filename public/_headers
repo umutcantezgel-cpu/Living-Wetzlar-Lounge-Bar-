@@ -1,0 +1,66 @@
+# Netlify/Vercel Headers Configuration
+# Security headers for Living Wetzlar Lounge Bar
+
+/*
+  # HSTS
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # CSP (Content Security Policy) - Strict mode
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; require-trusted-types-for 'script'; trusted-types default; upgrade-insecure-requests; block-all-mixed-content;
+
+  # X-Frame-Options
+  X-Frame-Options: DENY
+
+  # X-Content-Type-Options
+  X-Content-Type-Options: nosniff
+
+  # X-XSS-Protection
+  X-XSS-Protection: 1; mode=block
+
+  # Referrer-Policy
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions-Policy
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+
+  # Cross-Origin Policies
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Cache Control
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static Assets - Long cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts
+/assets/font/*
+  Cache-Control: public, max-age=31536000, immutable
+  Cross-Origin-Resource-Policy: cross-origin
+
+# Images
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Service Worker
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+  Service-Worker-Allowed: /
+
+# Manifest
+/site.webmanifest
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json
+
+# Error Pages
+/404.html
+  Cache-Control: public, max-age=3600
+
+/503.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Retry-After: 3600
+
+/offline.html
+  Cache-Control: public, max-age=86400

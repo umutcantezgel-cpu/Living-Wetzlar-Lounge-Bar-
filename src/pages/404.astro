@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout
+  title="404 – Seite nicht gefunden | Living Wetzlar"
+  description="Die angeforderte Seite wurde nicht gefunden."
+  robots="noindex, nofollow"
+>
+  <div class="error-page">
+    <div class="error-content">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Seite nicht gefunden</h2>
+      <p class="error-description">
+        Die von Ihnen gesuchte Seite existiert leider nicht oder wurde verschoben.
+      </p>
+      <div class="error-actions">
+        <Button href="/" variant="primary">Zur Startseite</Button>
+        <Button href="/contact" variant="outline">Kontakt</Button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    background: linear-gradient(135deg, var(--color-brand-secondary) 0%, var(--color-charcoal-700) 100%);
+    color: var(--color-text-inverted);
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 32rem;
+  }
+
+  .error-code {
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand-primary);
+    margin-bottom: var(--space-4);
+    line-height: 1;
+  }
+
+  .error-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .error-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-300);
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .error-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

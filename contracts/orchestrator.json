@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "description": "Layout and composition orchestrator for page assembly",
+  "layouts": {
+    "default": {
+      "components": [
+        {
+          "id": "skip-to-content",
+          "type": "SkipLink",
+          "slot": "before-header",
+          "props": {
+            "target": "#main-content",
+            "label": "Zum Hauptinhalt springen"
+          }
+        },
+        {
+          "id": "main-header",
+          "type": "Header",
+          "slot": "header",
+          "props": {
+            "sticky": true,
+            "transparent": false
+          },
+          "children": [
+            {
+              "id": "main-navigation",
+              "type": "Navigation",
+              "contract": "navigation.contract.json"
+            }
+          ]
+        },
+        {
+          "id": "main-content",
+          "type": "Main",
+          "slot": "main",
+          "props": {
+            "role": "main",
+            "id": "main-content"
+          }
+        },
+        {
+          "id": "main-footer",
+          "type": "Footer",
+          "slot": "footer",
+          "children": [
+            {
+              "id": "footer-navigation",
+              "type": "FooterNav"
+            },
+            {
+              "id": "footer-social",
+              "type": "SocialLinks"
+            },
+            {
+              "id": "footer-legal",
+              "type": "LegalLinks"
+            }
+          ]
+        },
+        {
+          "id": "consent-banner",
+          "type": "ConsentBanner",
+          "slot": "overlays",
+          "condition": "!hasConsent",
+          "props": {
+            "position": "bottom",
+            "blocking": false
+          }
+        }
+      ]
+    },
+    "minimal": {
+      "description": "Minimal layout for error pages (404, 503, offline)",
+      "components": [
+        {
+          "id": "minimal-header",
+          "type": "Header",
+          "slot": "header",
+          "props": {
+            "minimal": true
+          }
+        },
+        {
+          "id": "main-content",
+          "type": "Main",
+          "slot": "main",
+          "props": {
+            "role": "main",
+            "id": "main-content"
+          }
+        },
+        {
+          "id": "minimal-footer",
+          "type": "Footer",
+          "slot": "footer",
+          "props": {
+            "minimal": true
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "navigation.items": {
+      "source": "seo.routes.json",
+      "transform": "filterByPriority(> 0.5)"
+    },
+    "footer.legalLinks": {
+      "source": "seo.routes.json",
+      "filter": "path in ['/impressum', '/datenschutz']"
+    },
+    "consent.categories": {
+      "source": "manifest.webspec.json",
+      "path": "consent.categories"
+    }
+  },
+  "conditions": {
+    "hasConsent": "localStorage.getItem('consent-preferences') !== null",
+    "isProduction": "import.meta.env.PROD === true",
+    "prefersDarkMode": "window.matchMedia('(prefers-color-scheme: dark)').matches"
+  }
+}

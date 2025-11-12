@@ -1,0 +1,161 @@
+---
+interface Props {
+  provider: 'youtube' | 'google-maps';
+  embedId: string;
+  title: string;
+  aspectRatio?: '16/9' | '4/3' | '1/1';
+}
+
+const { provider, embedId, title, aspectRatio = '16/9' } = Astro.props;
+
+const providerInfo = {
+  youtube: {
+    name: 'YouTube',
+    privacyUrl: 'https://policies.google.com/privacy',
+    embedUrl: `https://www.youtube-nocookie.com/embed/${embedId}`,
+    thumbnailUrl: `https://img.youtube.com/vi/${embedId}/maxresdefault.jpg`
+  },
+  'google-maps': {
+    name: 'Google Maps',
+    privacyUrl: 'https://policies.google.com/privacy',
+    embedUrl: `https://www.google.com/maps/embed?pb=${embedId}`,
+    thumbnailUrl: ''
+  }
+};
+
+const info = providerInfo[provider];
+---
+
+<div class="two-click-embed" data-provider={provider} data-embed-id={embedId} style={`aspect-ratio: ${aspectRatio}`}>
+  <div class="two-click-placeholder">
+    <div class="two-click-content">
+      <svg class="two-click-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+        <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+      </svg>
+      <h3 class="two-click-title">{title}</h3>
+      <p class="two-click-description">
+        Dieser Inhalt wird von <strong>{info.name}</strong> bereitgestellt. Durch Aktivierung werden Daten an {info.name} übermittelt.
+      </p>
+      <button type="button" class="btn btn-primary two-click-activate" data-embed-id={embedId}>
+        Inhalt aktivieren
+      </button>
+      <a href={info.privacyUrl} target="_blank" rel="noopener noreferrer" class="two-click-privacy">
+        Datenschutzerklärung von {info.name}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .two-click-embed {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-surface-tertiary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .two-click-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+  }
+
+  .two-click-content {
+    text-align: center;
+    max-width: 32rem;
+  }
+
+  .two-click-icon {
+    margin: 0 auto var(--space-4);
+    color: var(--color-brand-primary);
+  }
+
+  .two-click-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+  }
+
+  .two-click-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .two-click-privacy {
+    display: inline-block;
+    margin-top: var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-link);
+  }
+
+  .two-click-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<script>
+  class TwoClickEmbed extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector('.two-click-activate') as HTMLButtonElement;
+      button?.addEventListener('click', this.activate.bind(this));
+    }
+
+    activate() {
+      const provider = this.dataset.provider;
+      const embedId = this.dataset.embedId;
+
+      if (!provider || !embedId) return;
+
+      const placeholder = this.querySelector('.two-click-placeholder');
+      const iframe = document.createElement('iframe');
+      iframe.className = 'two-click-iframe';
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', this.querySelector('.two-click-title')?.textContent || '');
+
+      if (provider === 'youtube') {
+        iframe.src = `https://www.youtube-nocookie.com/embed/${embedId}?autoplay=1`;
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      } else if (provider === 'google-maps') {
+        iframe.src = `https://www.google.com/maps/embed?pb=${embedId}`;
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      }
+
+      placeholder?.remove();
+      this.appendChild(iframe);
+
+      // Dispatch event
+      window.dispatchEvent(new CustomEvent('embed:loaded', {
+        detail: { provider, embedId }
+      }));
+    }
+  }
+
+  if (!customElements.get('two-click-embed')) {
+    customElements.define('two-click-embed', TwoClickEmbed);
+  }
+
+  // Wrap existing embeds
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.two-click-embed').forEach(el => {
+      if (!el.closest('two-click-embed')) {
+        const wrapper = document.createElement('two-click-embed');
+        wrapper.dataset.provider = el.getAttribute('data-provider') || '';
+        wrapper.dataset.embedId = el.getAttribute('data-embed-id') || '';
+        el.parentNode?.insertBefore(wrapper, el);
+        wrapper.appendChild(el);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,17 @@
+# robots.txt for Living Wetzlar Lounge Bar
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
+
+# Specific pages
+Disallow: /impressum
+Disallow: /datenschutz
+
+# Sitemap
+Sitemap: https://living-wetzlar.de/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

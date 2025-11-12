@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "componentId": "navigation",
+  "version": "1.0.0",
+  "description": "Accessible main navigation with mobile menu",
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Keyboard navigable (Tab, Arrow keys)",
+      "Screen reader friendly with proper ARIA",
+      "Skip to main content link",
+      "Mobile menu with aria-expanded state",
+      "Focus trap in mobile menu",
+      "Current page indicated via aria-current"
+    ],
+    "roles": ["navigation", "menu", "menuitem"],
+    "landmarks": ["navigation"],
+    "keyboardNavigation": {
+      "Tab": "Navigate through menu items",
+      "Enter/Space": "Activate menu item or toggle submenu",
+      "Escape": "Close mobile menu",
+      "ArrowDown/ArrowUp": "Navigate submenu items"
+    }
+  },
+  "performance": {
+    "jsWeight": "~5KB",
+    "cssWeight": "~4KB",
+    "renderCost": "medium",
+    "criticalCSS": true,
+    "lazyLoad": false
+  },
+  "consent": {
+    "required": false,
+    "category": "essential"
+  },
+  "props": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "href": { "type": "string" },
+          "current": { "type": "boolean" },
+          "children": { "type": "array" }
+        }
+      }
+    },
+    "logo": {
+      "type": "object",
+      "properties": {
+        "src": { "type": "string" },
+        "alt": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      }
+    }
+  },
+  "events": {
+    "emits": ["navigation.click", "mobile-menu.open", "mobile-menu.close"]
+  }
+}

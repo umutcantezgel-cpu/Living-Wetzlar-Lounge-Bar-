@@ -1,0 +1,243 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "application": {
+    "name": "Living Wetzlar Lounge Bar",
+    "shortName": "Living Wetzlar",
+    "description": "Premium Lounge Bar im Herzen von Wetzlar – elegante Atmosphäre, exquisite Getränke, unvergessliche Events",
+    "url": "https://living-wetzlar.de",
+    "language": {
+      "default": "de-DE",
+      "supported": ["de-DE", "en-US"]
+    },
+    "contact": {
+      "email": "info@living-wetzlar.de",
+      "phone": "+49 6441 123456",
+      "address": {
+        "street": "Musterstraße 123",
+        "city": "Wetzlar",
+        "postal": "35578",
+        "country": "DE"
+      }
+    },
+    "businessHours": {
+      "monday": "17:00-01:00",
+      "tuesday": "17:00-01:00",
+      "wednesday": "17:00-01:00",
+      "thursday": "17:00-02:00",
+      "friday": "17:00-03:00",
+      "saturday": "17:00-03:00",
+      "sunday": "closed"
+    },
+    "social": {
+      "instagram": "https://instagram.com/livingwetzlar",
+      "facebook": "https://facebook.com/livingwetzlar"
+    }
+  },
+  "performance": {
+    "budgets": {
+      "javascript": {
+        "maxPerPage": 51200,
+        "unit": "bytes",
+        "enforcement": "error"
+      },
+      "css": {
+        "maxPerPage": 30720,
+        "unit": "bytes",
+        "enforcement": "warning"
+      },
+      "images": {
+        "maxPerPage": 512000,
+        "unit": "bytes",
+        "enforcement": "warning"
+      },
+      "fonts": {
+        "maxTotal": 102400,
+        "unit": "bytes",
+        "enforcement": "error"
+      }
+    },
+    "coreWebVitals": {
+      "LCP": {
+        "target": 2500,
+        "unit": "ms",
+        "percentile": 75
+      },
+      "INP": {
+        "target": 200,
+        "unit": "ms",
+        "percentile": 75
+      },
+      "CLS": {
+        "target": 0.1,
+        "unit": "score",
+        "percentile": 75
+      }
+    },
+    "lighthouse": {
+      "performance": {
+        "minScore": 95,
+        "device": "mobile"
+      },
+      "accessibility": {
+        "minScore": 100,
+        "device": "mobile"
+      },
+      "bestPractices": {
+        "minScore": 95,
+        "device": "mobile"
+      },
+      "seo": {
+        "minScore": 95,
+        "device": "mobile"
+      }
+    }
+  },
+  "security": {
+    "contentSecurityPolicy": {
+      "mode": "strict",
+      "profiles": {
+        "dev": {
+          "reportOnly": true,
+          "reportUri": "/csp-report"
+        },
+        "stage": {
+          "reportOnly": false,
+          "reportUri": "/csp-report"
+        },
+        "prod": {
+          "reportOnly": false,
+          "reportUri": "/csp-report"
+        }
+      },
+      "directives": {
+        "default-src": ["'none'"],
+        "script-src": ["'self'"],
+        "style-src": ["'self'"],
+        "img-src": ["'self'", "data:", "blob:"],
+        "font-src": ["'self'"],
+        "connect-src": ["'self'"],
+        "media-src": ["'self'"],
+        "object-src": ["'none'"],
+        "frame-src": ["'none'"],
+        "worker-src": ["'self'"],
+        "form-action": ["'self'"],
+        "frame-ancestors": ["'none'"],
+        "base-uri": ["'self'"],
+        "manifest-src": ["'self'"],
+        "require-trusted-types-for": ["'script'"],
+        "trusted-types": ["default"]
+      }
+    },
+    "headers": {
+      "strictTransportSecurity": {
+        "maxAge": 31536000,
+        "includeSubDomains": true,
+        "preload": true
+      },
+      "xFrameOptions": "DENY",
+      "xContentTypeOptions": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": {
+        "geolocation": [],
+        "microphone": [],
+        "camera": [],
+        "payment": [],
+        "usb": [],
+        "magnetometer": [],
+        "gyroscope": [],
+        "accelerometer": []
+      },
+      "crossOriginEmbedderPolicy": "require-corp",
+      "crossOriginOpenerPolicy": "same-origin",
+      "crossOriginResourcePolicy": "same-origin"
+    },
+    "subresourceIntegrity": {
+      "enabled": true,
+      "algorithms": ["sha384"],
+      "coverage": {
+        "css": true,
+        "js": true,
+        "fonts": true
+      }
+    }
+  },
+  "consent": {
+    "mode": "opt-in",
+    "categories": {
+      "essential": {
+        "required": true,
+        "description": "Technisch notwendige Cookies für den Betrieb der Website"
+      },
+      "analytics": {
+        "required": false,
+        "description": "Cookies zur Analyse des Nutzerverhaltens (anonymisiert)"
+      },
+      "marketing": {
+        "required": false,
+        "description": "Cookies für personalisierte Werbung"
+      }
+    },
+    "blockBeforeConsent": {
+      "thirdPartyScripts": true,
+      "thirdPartyIframes": true,
+      "thirdPartyImages": false
+    },
+    "twoClickEmbeds": {
+      "enabled": true,
+      "providers": ["youtube", "google-maps", "instagram"]
+    }
+  },
+  "features": {
+    "serviceWorker": {
+      "enabled": true,
+      "offlinePages": ["/", "/offline.html"]
+    },
+    "webManifest": {
+      "enabled": true,
+      "themeColor": "#D4AF37",
+      "backgroundColor": "#1A1A1A"
+    },
+    "lazyLoading": {
+      "images": true,
+      "iframes": true
+    },
+    "criticalCSS": {
+      "enabled": true,
+      "inline": false
+    }
+  },
+  "seo": {
+    "siteName": "Living Wetzlar Lounge Bar",
+    "defaultTitle": "Living Wetzlar – Premium Lounge Bar in Wetzlar",
+    "titleTemplate": "%s | Living Wetzlar",
+    "defaultDescription": "Erleben Sie exklusive Atmosphäre in der Living Wetzlar Lounge Bar. Premium-Cocktails, edle Weine und unvergessliche Events im Herzen von Wetzlar.",
+    "defaultImage": "/assets/img/og-image.jpg",
+    "twitterHandle": "@livingwetzlar",
+    "structuredData": {
+      "type": "BarOrPub",
+      "priceRange": "€€€"
+    }
+  },
+  "monitoring": {
+    "realUserMonitoring": {
+      "enabled": true,
+      "sampleRate": 1.0
+    },
+    "errorTracking": {
+      "enabled": true,
+      "sampleRate": 1.0
+    },
+    "slos": {
+      "availability": {
+        "target": 99.9,
+        "unit": "percent"
+      },
+      "responseTime": {
+        "target": 200,
+        "unit": "ms",
+        "percentile": 95
+      }
+    }
+  }
+}

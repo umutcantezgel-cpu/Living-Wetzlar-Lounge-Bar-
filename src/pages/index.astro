@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import seoRoutes from '../../contracts/seo.routes.json';
+
+const route = seoRoutes.routes.find(r => r.path === '/');
+const seo = route?.languages['de-DE'];
+const structuredData = route?.structuredData;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+---
+
+<BaseLayout
+  title={seo?.title || ''}
+  description={seo?.description || ''}
+  canonical={seo?.canonical}
+  structuredData={structuredData}
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content container">
+        <h1 class="hero-title">Willkommen im Living Wetzlar</h1>
+        <p class="hero-subtitle">
+          Erleben Sie exklusive Atmosphäre, Premium-Cocktails und unvergessliche Events im Herzen von Wetzlar.
+        </p>
+        <div class="hero-actions">
+          <Button href="/reservation" variant="primary" size="lg">
+            Tisch reservieren
+          </Button>
+          <Button href="/drinks-food" variant="outline" size="lg">
+            Unsere Karte
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features container">
+      <h2 class="section-title">Was uns auszeichnet</h2>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🍸</div>
+          <h3 class="feature-title">Premium-Cocktails</h3>
+          <p class="feature-description">
+            Handgefertigte Kreationen unserer erfahrenen Mixologen mit den besten Zutaten.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🎵</div>
+          <h3 class="feature-title">Live-Events</h3>
+          <p class="feature-description">
+            Regelmäßige Live-Musik, DJ-Nights und exklusive Veranstaltungen.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">✨</div>
+          <h3 class="feature-title">Elegante Atmosphäre</h3>
+          <p class="feature-description">
+            Stilvolles Ambiente für besondere Momente und entspannte Abende.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-content container">
+        <h2 class="cta-title">Bereit für ein unvergessliches Erlebnis?</h2>
+        <p class="cta-description">
+          Reservieren Sie jetzt Ihren Tisch und erleben Sie die Living Wetzlar Lounge Bar.
+        </p>
+        <Button href="/reservation" variant="primary" size="lg">
+          Jetzt reservieren
+        </Button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ConsentBanner />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-brand-secondary) 0%, var(--color-charcoal-700) 100%);
+    color: var(--color-text-inverted);
+    padding: var(--space-20) var(--space-6);
+    min-height: var(--hero-min-height);
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-tight);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-2xl));
+    color: var(--color-neutral-300);
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Features Section */
+  .features {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    color: var(--color-text-primary);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: var(--space-6);
+    border-radius: var(--card-radius);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: all var(--duration-300) var(--ease-out);
+  }
+
+  .feature-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-4px);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .feature-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+    color: var(--color-brand-primary);
+  }
+
+  .feature-description {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-inverted);
+    padding: var(--space-16) var(--space-6);
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+  }
+</style>

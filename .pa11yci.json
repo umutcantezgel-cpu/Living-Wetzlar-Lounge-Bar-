@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "timeout": 30000,
+    "wait": 1000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "standard": "WCAG2AA",
+    "level": "error",
+    "runners": ["axe", "htmlcs"],
+    "ignore": []
+  },
+  "urls": [
+    "http://localhost:4321/",
+    "http://localhost:4321/drinks-food",
+    "http://localhost:4321/about",
+    "http://localhost:4321/events",
+    "http://localhost:4321/gallery",
+    "http://localhost:4321/reservation",
+    "http://localhost:4321/contact",
+    "http://localhost:4321/impressum",
+    "http://localhost:4321/datenschutz",
+    "http://localhost:4321/404"
+  ]
+}
