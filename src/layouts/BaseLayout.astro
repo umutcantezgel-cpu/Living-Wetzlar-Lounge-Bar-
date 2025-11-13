@@ -82,7 +82,7 @@ const ogImage = `${siteUrl}/assets/img/og-image.jpg`;
 
   <!-- Structured Data -->
   {structuredData && (
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   )}
 </head>
 <body>
