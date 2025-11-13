@@ -1,0 +1,395 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import seoRoutes from '../../contracts/seo.routes.json';
+
+const route = seoRoutes.routes.find(r => r.path === '/reservation');
+const seo = route?.languages['de-DE'];
+const structuredData = route?.structuredData;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+---
+
+<BaseLayout
+  title={seo?.title || ''}
+  description={seo?.description || ''}
+  canonical={seo?.canonical}
+  structuredData={structuredData}
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Tisch reservieren</h1>
+        <p class="hero-description scroll-reveal">
+          Sichern Sie sich die besten Plätze für Ihren unvergesslichen Abend
+        </p>
+      </div>
+    </section>
+
+    <!-- Reservation Form -->
+    <section class="form-section container">
+      <div class="form-container scroll-reveal">
+        <form class="reservation-form" id="reservationForm" method="POST" action="/api/reservation">
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name" class="form-label">Name *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+              placeholder="Ihr vollständiger Name"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email" class="form-label">E-Mail *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              required
+              placeholder="ihre.email@beispiel.de"
+            />
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone" class="form-label">Telefon *</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              required
+              placeholder="+49 123 456789"
+            />
+          </div>
+
+          <!-- Date & Time -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date" class="form-label">Datum *</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="time" class="form-label">Uhrzeit *</label>
+              <input
+                type="time"
+                id="time"
+                name="time"
+                class="form-input"
+                required
+                min="17:00"
+                max="23:00"
+              />
+            </div>
+          </div>
+
+          <!-- Number of Guests -->
+          <div class="form-group">
+            <label for="guests" class="form-label">Anzahl Personen *</label>
+            <select id="guests" name="guests" class="form-input" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 Personen</option>
+              <option value="3">3 Personen</option>
+              <option value="4">4 Personen</option>
+              <option value="5">5 Personen</option>
+              <option value="6">6 Personen</option>
+              <option value="7+">7+ Personen (Gruppenanfrage)</option>
+            </select>
+          </div>
+
+          <!-- Special Requests -->
+          <div class="form-group">
+            <label for="message" class="form-label">Besondere Wünsche (optional)</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-input form-textarea"
+              rows="4"
+              placeholder="z.B. Tischlage, Anlass, besondere Anforderungen..."
+            ></textarea>
+          </div>
+
+          <!-- Privacy -->
+          <div class="form-group form-checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="privacy" name="privacy" required />
+              <span>Ich habe die <a href="/datenschutz" class="text-link">Datenschutzerklärung</a> gelesen und akzeptiere sie. *</span>
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-actions">
+            <Button type="submit" variant="primary" size="lg" fullWidth={true}>
+              Reservierung anfragen
+            </Button>
+          </div>
+
+          <p class="form-note">
+            * Pflichtfelder. Wir bestätigen Ihre Reservierung per E-Mail oder Telefon.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section gradient-light">
+      <div class="container">
+        <div class="info-grid scroll-reveal">
+          <article class="info-card">
+            <h3 class="info-title">📞 Telefonische Reservierung</h3>
+            <p class="info-text">
+              Sie können uns auch direkt anrufen:<br/>
+              <strong>+49 6441 123456</strong><br/>
+              Mo-Sa: 17:00 - 22:00 Uhr
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-title">⏰ Öffnungszeiten</h3>
+            <p class="info-text">
+              Mo-Mi: 17:00 - 01:00 Uhr<br/>
+              Do: 17:00 - 02:00 Uhr<br/>
+              Fr-Sa: 17:00 - 03:00 Uhr<br/>
+              So: Geschlossen
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-title">👥 Gruppen & Events</h3>
+            <p class="info-text">
+              Für Gruppen ab 8 Personen oder private Events kontaktieren Sie uns bitte direkt per E-Mail:<br/>
+              <strong>events@living-wetzlar.de</strong>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .form-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .form-container {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .reservation-form {
+    background: var(--color-surface-base);
+    padding: var(--space-8);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .form-label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+    color: var(--color-text-primary);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    background: var(--color-surface-base);
+    transition: border-color 0.2s var(--ease-out);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .text-link {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+  }
+
+  .text-link:hover {
+    color: var(--color-brand-primary-hover);
+  }
+
+  .form-actions {
+    margin-top: var(--space-8);
+  }
+
+  .form-note {
+    margin-top: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  .info-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .info-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .info-card {
+    text-align: center;
+    padding: var(--space-6);
+    background: var(--color-surface-base);
+    border-radius: var(--card-radius);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .info-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-4);
+    color: var(--color-text-primary);
+  }
+
+  .info-text {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .info-text strong {
+    color: var(--color-brand-primary);
+  }
+
+  .gradient-light {
+    background-color: var(--color-surface-secondary);
+  }
+</style>
+
+<script>
+  // Form validation and submission handling
+  (() => {
+    const form = document.getElementById('reservationForm') as HTMLFormElement;
+    if (!form) return;
+
+    // Set minimum date to today
+    const dateInput = document.getElementById('date') as HTMLInputElement;
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic client-side validation
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Show success message (in production, this would make an API call)
+      alert('Vielen Dank für Ihre Reservierungsanfrage!\n\nWir werden uns in Kürze per E-Mail oder Telefon bei Ihnen melden, um Ihre Reservierung zu bestätigen.');
+
+      // Reset form
+      form.reset();
+    });
+  })();
+</script>

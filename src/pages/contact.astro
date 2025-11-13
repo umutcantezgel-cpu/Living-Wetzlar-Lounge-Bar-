@@ -1,0 +1,444 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import seoRoutes from '../../contracts/seo.routes.json';
+
+const route = seoRoutes.routes.find(r => r.path === '/contact');
+const seo = route?.languages['de-DE'];
+const structuredData = route?.structuredData;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+---
+
+<BaseLayout
+  title={seo?.title || ''}
+  description={seo?.description || ''}
+  canonical={seo?.canonical}
+  structuredData={structuredData}
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Kontakt</h1>
+        <p class="hero-description scroll-reveal">
+          Wir freuen uns auf Ihre Nachricht – Für Reservierungen, Events oder allgemeine Anfragen
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-section container">
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper scroll-reveal">
+          <h2 class="form-heading">Nachricht senden</h2>
+          <form class="contact-form" id="contactForm" method="POST" action="/api/contact">
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name" class="form-label">Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                required
+                placeholder="Ihr Name"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email" class="form-label">E-Mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                required
+                placeholder="ihre.email@beispiel.de"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone" class="form-label">Telefon (optional)</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-input"
+                placeholder="+49 123 456789"
+              />
+            </div>
+
+            <!-- Subject -->
+            <div class="form-group">
+              <label for="subject" class="form-label">Betreff *</label>
+              <select id="subject" name="subject" class="form-input" required>
+                <option value="">Bitte wählen</option>
+                <option value="reservation">Reservierung</option>
+                <option value="event">Event-Anfrage</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Sonstiges</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message" class="form-label">Nachricht *</label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input form-textarea"
+                required
+                rows="6"
+                placeholder="Ihre Nachricht an uns..."
+              ></textarea>
+            </div>
+
+            <!-- Privacy -->
+            <div class="form-group form-checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                <span>Ich habe die <a href="/datenschutz" class="text-link">Datenschutzerklärung</a> gelesen und akzeptiere sie. *</span>
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-actions">
+              <Button type="submit" variant="primary" size="lg" fullWidth={true}>
+                Nachricht senden
+              </Button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info-wrapper scroll-reveal">
+          <h2 class="info-heading">Kontaktinformationen</h2>
+
+          <div class="info-blocks">
+            <article class="info-block">
+              <h3 class="info-block-title">📍 Adresse</h3>
+              <p class="info-block-text">
+                Living Wetzlar Lounge Bar<br/>
+                Musterstraße 123<br/>
+                35578 Wetzlar<br/>
+                Deutschland
+              </p>
+            </article>
+
+            <article class="info-block">
+              <h3 class="info-block-title">📞 Telefon</h3>
+              <p class="info-block-text">
+                <a href="tel:+4964441123456" class="contact-link">+49 6441 123456</a><br/>
+                Mo-Sa: 17:00 - 22:00 Uhr
+              </p>
+            </article>
+
+            <article class="info-block">
+              <h3 class="info-block-title">✉️ E-Mail</h3>
+              <p class="info-block-text">
+                Allgemein: <a href="mailto:info@living-wetzlar.de" class="contact-link">info@living-wetzlar.de</a><br/>
+                Events: <a href="mailto:events@living-wetzlar.de" class="contact-link">events@living-wetzlar.de</a>
+              </p>
+            </article>
+
+            <article class="info-block">
+              <h3 class="info-block-title">⏰ Öffnungszeiten</h3>
+              <p class="info-block-text">
+                Montag - Mittwoch: 17:00 - 01:00<br/>
+                Donnerstag: 17:00 - 02:00<br/>
+                Freitag - Samstag: 17:00 - 03:00<br/>
+                Sonntag: Geschlossen
+              </p>
+            </article>
+
+            <article class="info-block">
+              <h3 class="info-block-title">🌐 Social Media</h3>
+              <div class="social-links">
+                <a href="https://instagram.com/livingwetzlar" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
+                <a href="https://facebook.com/livingwetzlar" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="quick-links">
+            <Button href="/reservation" variant="primary" size="md" fullWidth={true}>
+              Tisch reservieren
+            </Button>
+            <Button href="/events" variant="outline" size="md" fullWidth={true}>
+              Event-Kalender
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section (Placeholder) -->
+    <section class="map-section">
+      <div class="map-placeholder gradient-dark">
+        <p class="map-placeholder-text">
+          📍 Musterstraße 123, 35578 Wetzlar<br/>
+          <small>(Karte wird in der finalen Version hier angezeigt)</small>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .contact-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  /* Form Styles */
+  .contact-form-wrapper,
+  .contact-info-wrapper {
+    background: var(--color-surface-base);
+    padding: var(--space-8);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .form-heading,
+  .info-heading {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-6);
+    color: var(--color-text-primary);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+    color: var(--color-text-primary);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    background: var(--color-surface-base);
+    transition: border-color 0.2s var(--ease-out);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .text-link {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+  }
+
+  .text-link:hover {
+    color: var(--color-brand-primary-hover);
+  }
+
+  .form-actions {
+    margin-top: var(--space-8);
+  }
+
+  /* Contact Info Styles */
+  .info-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .info-block {
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .info-block:last-child {
+    border-bottom: none;
+  }
+
+  .info-block-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+  }
+
+  .info-block-text {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .contact-link {
+    color: var(--color-brand-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .contact-link:hover {
+    text-decoration: underline;
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-brand-primary-light);
+    color: var(--color-brand-primary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    transition: all 0.2s var(--ease-out);
+  }
+
+  .social-link:hover {
+    background: var(--color-brand-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  .quick-links {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  /* Map Section */
+  .map-section {
+    height: 400px;
+  }
+
+  .map-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .map-placeholder-text {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .map-placeholder-text small {
+    font-size: var(--font-size-sm);
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+  // Contact form submission handling
+  (() => {
+    const form = document.getElementById('contactForm') as HTMLFormElement;
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic client-side validation
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Show success message (in production, this would make an API call)
+      alert('Vielen Dank für Ihre Nachricht!\n\nWir haben Ihre Anfrage erhalten und werden uns schnellstmöglich bei Ihnen melden.');
+
+      // Reset form
+      form.reset();
+    });
+  })();
+</script>

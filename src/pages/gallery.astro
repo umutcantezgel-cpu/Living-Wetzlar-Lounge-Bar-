@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import seoRoutes from '../../contracts/seo.routes.json';
+
+const route = seoRoutes.routes.find(r => r.path === '/gallery');
+const seo = route?.languages['de-DE'];
+const structuredData = route?.structuredData;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+
+// Placeholder gallery items
+const galleryItems = [
+  { id: 1, title: 'Bar Atmosphere', category: 'Interior' },
+  { id: 2, title: 'Signature Cocktails', category: 'Drinks' },
+  { id: 3, title: 'Live Music Event', category: 'Events' },
+  { id: 4, title: 'Lounge Area', category: 'Interior' },
+  { id: 5, title: 'VIP Section', category: 'Interior' },
+  { id: 6, title: 'DJ Night', category: 'Events' },
+  { id: 7, title: 'Premium Spirits', category: 'Drinks' },
+  { id: 8, title: 'Evening Ambiance', category: 'Interior' },
+  { id: 9, title: 'Special Events', category: 'Events' }
+];
+---
+
+<BaseLayout
+  title={seo?.title || ''}
+  description={seo?.description || ''}
+  canonical={seo?.canonical}
+  structuredData={structuredData}
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Galerie</h1>
+        <p class="hero-description scroll-reveal">
+          Impressionen aus dem Living Wetzlar – Erleben Sie die einzigartige Atmosphäre
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery Filter (Placeholder) -->
+    <section class="filter-section container">
+      <div class="filter-buttons scroll-reveal">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="interior">Interior</button>
+        <button class="filter-btn" data-filter="drinks">Drinks</button>
+        <button class="filter-btn" data-filter="events">Events</button>
+      </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section container">
+      <div class="gallery-grid">
+        {galleryItems.map((item, index) => (
+          <article
+            class="gallery-item scroll-reveal"
+            data-category={item.category.toLowerCase()}
+            style={`transition-delay: ${index * 0.05}s`}
+          >
+            <div class="gallery-image-placeholder gradient-dark">
+              <span class="gallery-placeholder-text">{item.title}</span>
+            </div>
+            <div class="gallery-item-info">
+              <h3 class="gallery-item-title">{item.title}</h3>
+              <span class="gallery-item-category">{item.category}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section gradient-gold">
+      <div class="container cta-content">
+        <h2 class="cta-title">Erleben Sie es selbst</h2>
+        <p class="cta-description">Besuchen Sie uns und genießen Sie die besondere Atmosphäre</p>
+        <Button href="/reservation" variant="secondary" size="lg">
+          Tisch reservieren
+        </Button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .filter-section {
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: var(--space-2) var(--space-6);
+    border: 2px solid var(--color-brand-primary);
+    background: transparent;
+    color: var(--color-brand-primary);
+    border-radius: var(--btn-radius);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--color-brand-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  .gallery-section {
+    padding: var(--space-12) var(--space-6) var(--space-20);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-8px);
+  }
+
+  .gallery-image-placeholder {
+    aspect-ratio: 4/3;
+    border-radius: var(--card-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-placeholder-text {
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    padding: var(--space-4);
+  }
+
+  .gallery-item-info {
+    text-align: center;
+  }
+
+  .gallery-item-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+    color: var(--color-text-primary);
+  }
+
+  .gallery-item-category {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-brand-primary-light);
+    color: var(--color-brand-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .cta-section {
+    padding: var(--space-16) var(--space-6);
+    color: var(--color-text-inverted);
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-6);
+    opacity: 0.9;
+  }
+</style>
+
+<script>
+  // Gallery filter functionality
+  (() => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter items
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import seoRoutes from '../../contracts/seo.routes.json';
+
+const route = seoRoutes.routes.find(r => r.path === '/drinks-food');
+const seo = route?.languages['de-DE'];
+const structuredData = route?.structuredData;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Getränke & Speisen', href: '/drinks-food' },
+  { label: 'Über uns', href: '/about' },
+  { label: 'Events', href: '/events' },
+  { label: 'Galerie', href: '/gallery' },
+  { label: 'Reservierung', href: '/reservation' },
+  { label: 'Kontakt', href: '/contact' }
+];
+
+const cocktails = [
+  { name: 'Signature Martini', price: '€14', description: 'Vodka, Wermut, Olive' },
+  { name: 'Gold Rush', price: '€13', description: 'Bourbon, Honig, Zitrone' },
+  { name: 'Negroni', price: '€12', description: 'Gin, Campari, Wermut' },
+  { name: 'Old Fashioned', price: '€15', description: 'Whiskey, Angostura, Orange' },
+  { name: 'Mojito', price: '€11', description: 'Rum, Minze, Limette, Soda' },
+  { name: 'Espresso Martini', price: '€13', description: 'Vodka, Kaffeelikör, Espresso' }
+];
+
+const wines = [
+  { name: 'Riesling Trocken', price: '€8/€32', description: 'Rheingau, Deutschland' },
+  { name: 'Grauburgunder', price: '€7/€28', description: 'Baden, Deutschland' },
+  { name: 'Chardonnay', price: '€9/€36', description: 'Burgund, Frankreich' },
+  { name: 'Spätburgunder', price: '€10/€40', description: 'Pfalz, Deutschland' }
+];
+
+const snacks = [
+  { name: 'Oliven & Antipasti', price: '€8', description: 'Mediterrane Auswahl' },
+  { name: 'Käseplatte', price: '€16', description: 'Internationale Käseauswahl' },
+  { name: 'Bruschetta', price: '€9', description: 'Tomaten, Basilikum, Olivenöl' },
+  { name: 'Tapas-Teller', price: '€18', description: 'Spanische Spezialitäten' }
+];
+---
+
+<BaseLayout
+  title={seo?.title || ''}
+  description={seo?.description || ''}
+  canonical={seo?.canonical}
+  structuredData={structuredData}
+>
+  <Navigation items={navItems} />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero gradient-dark">
+      <div class="container">
+        <h1 class="hero-title text-shadow-strong scroll-reveal">Getränke & Speisen</h1>
+        <p class="hero-description scroll-reveal">
+          Handgefertigte Cocktails, edle Weine und erlesene Snacks
+        </p>
+      </div>
+    </section>
+
+    <!-- Cocktails -->
+    <section class="menu-section container">
+      <h2 class="section-title scroll-reveal">Premium Cocktails</h2>
+      <div class="menu-grid">
+        {cocktails.map((item, index) => (
+          <article class="menu-item scroll-reveal" style={`transition-delay: ${index * 0.1}s`}>
+            <div class="menu-item-header">
+              <h3 class="menu-item-name">{item.name}</h3>
+              <span class="menu-item-price">{item.price}</span>
+            </div>
+            <p class="menu-item-description">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Wines -->
+    <section class="menu-section gradient-light">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">Edle Weine</h2>
+        <div class="menu-grid">
+          {wines.map((item, index) => (
+            <article class="menu-item scroll-reveal" style={`transition-delay: ${index * 0.1}s`}>
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">{item.name}</h3>
+                <span class="menu-item-price">{item.price}</span>
+              </div>
+              <p class="menu-item-description">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Snacks -->
+    <section class="menu-section container">
+      <h2 class="section-title scroll-reveal">Erlesene Snacks</h2>
+      <div class="menu-grid">
+        {snacks.map((item, index) => (
+          <article class="menu-item scroll-reveal" style={`transition-delay: ${index * 0.1}s`}>
+            <div class="menu-item-header">
+              <h3 class="menu-item-name">{item.name}</h3>
+              <span class="menu-item-price">{item.price}</span>
+            </div>
+            <p class="menu-item-description">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section gradient-gold">
+      <div class="container cta-content">
+        <h2 class="cta-title">Bereit zu genießen?</h2>
+        <p class="cta-description">Reservieren Sie jetzt Ihren Tisch</p>
+        <Button href="/reservation" variant="secondary" size="lg">
+          Jetzt reservieren
+        </Button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ScrollReveal />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-20) var(--space-6);
+    text-align: center;
+    color: var(--color-text-inverted);
+  }
+
+  .hero-title {
+    font-size: clamp(var(--font-size-4xl), 6vw, var(--font-size-6xl));
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  .menu-section {
+    padding: var(--space-20) var(--space-6);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    color: var(--color-text-primary);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .menu-item {
+    padding: var(--space-6);
+    background: var(--color-surface-base);
+    border-radius: var(--card-radius);
+    border: 1px solid var(--color-border-subtle);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .menu-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-brand-primary);
+  }
+
+  .menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-2);
+    gap: var(--space-4);
+  }
+
+  .menu-item-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .menu-item-price {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand-primary);
+    flex-shrink: 0;
+  }
+
+  .menu-item-description {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .gradient-light {
+    background-color: var(--color-surface-secondary);
+  }
+
+  .cta-section {
+    padding: var(--space-16) var(--space-6);
+    color: var(--color-text-inverted);
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-6);
+    opacity: 0.9;
+  }
+</style>
