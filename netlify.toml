@@ -86,8 +86,9 @@
   autoLaunch = true
 
 # Plugin configuration (optional optimizations)
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
-  [plugins.inputs]
-    output_path = "reports/lighthouse.html"
+# Lighthouse plugin disabled by default - uncomment and add to package.json to enable
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+#
+#   [plugins.inputs]
+#     output_path = "reports/lighthouse.html"
