@@ -31,12 +31,13 @@
   status = 200
   force = false
 
-# Optional: Redirect HTTP to HTTPS
+# Automatic HTTPS redirect (works for any domain)
 [[redirects]]
-  from = "http://classic-shisha-lounge.netlify.app/*"
-  to = "https://classic-shisha-lounge.netlify.app/:splat"
+  from = "http://*"
+  to = "https://:splat"
   status = 301
   force = true
+  conditions = {Scheme = ["http"]}
 
 # Cache static assets for 1 year
 [[headers]]

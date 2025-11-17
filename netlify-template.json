@@ -1,0 +1,22 @@
+{
+  "generator": "@netlify/sdk@0.8.1",
+  "name": "classic-shisha-lounge",
+  "template_info": {
+    "name": "Classic Shisha Lounge & Cafe",
+    "description": "Premium Shisha Lounge & Cafe Website - Cyberpunk Design",
+    "url": "https://github.com/umutcantezgel-cpu/Living-Wetzlar-Lounge-Bar-",
+    "screenshots": [
+      {
+        "path": "https://images.unsplash.com/photo-1582037928769-181f2644ecb7?w=1920&q=80",
+        "alt": "Classic Shisha Lounge Hero"
+      }
+    ]
+  },
+  "build": {
+    "command": "npm run build",
+    "publish": "dist",
+    "environment": {
+      "NODE_VERSION": "18"
+    }
+  }
+}
