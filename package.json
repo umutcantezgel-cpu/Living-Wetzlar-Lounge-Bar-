@@ -8,7 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext js,jsx",
-    "format": "prettier --write \"src/**/*.{js,jsx,css}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "netlify:build": "vite build",
+    "netlify:verify": "bash .netlify-build-check.sh",
+    "deploy": "netlify deploy --prod",
+    "deploy:preview": "netlify deploy"
   },
   "dependencies": {
     "react": "^18.2.0",

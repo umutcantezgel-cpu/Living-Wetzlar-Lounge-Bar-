@@ -1,6 +1,11 @@
 # Classic Shisha Lounge & Cafe Website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/your-site-name/deploys)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/umutcantezgel-cpu/Living-Wetzlar-Lounge-Bar-)
+
 Premium Shisha Lounge & Cafe website with cyberpunk-themed design and neon aesthetics.
+
+**🚀 Ready for Netlify deployment!** See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete guide.
 
 ## Features
 
@@ -47,30 +52,38 @@ npm run preview
 
 ## Deployment
 
-### Vercel (Recommended)
+### 🎯 Netlify (Recommended - Production Ready!)
 
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Vercel will auto-detect Vite and deploy
+**One-Click Deploy:**
 
-Or use the CLI:
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/umutcantezgel-cpu/Living-Wetzlar-Lounge-Bar-)
+
+**Or use Netlify CLI:**
+
+```bash
+# Install Netlify CLI
+npm i -g netlify-cli
+
+# Login and deploy
+netlify login
+netlify init
+netlify deploy --prod
+```
+
+**Continuous Deployment:**
+1. Push your code to GitHub (already done!)
+2. Go to [Netlify Dashboard](https://app.netlify.com)
+3. Click "Add new site" → "Import an existing project"
+4. Select this repository
+5. Deploy! (Build settings auto-detected)
+
+📖 **Complete Netlify Guide:** See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
+
+### Alternative: Vercel
 
 ```bash
 npm i -g vercel
 vercel
-```
-
-### Netlify
-
-1. Push your code to GitHub
-2. Connect your repository to [Netlify](https://netlify.com)
-3. Netlify will auto-detect Vite and deploy
-
-Or use the CLI:
-
-```bash
-npm i -g netlify-cli
-netlify deploy --prod
 ```
 
 ### Manual Deployment
